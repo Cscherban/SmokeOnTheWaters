@@ -82,9 +82,11 @@ public class login extends AppCompatActivity {
                 Intent nextScreen = new Intent(getApplicationContext(), Account.class);
                 String email = username.getText().toString();
                 String pass = password.getText().toString();
-
-                attemptLogin(email, pass);
-
+                if (email.equals("") && pass.equals("")) {
+                    failure();
+                } else {
+                    attemptLogin(email, pass);
+                }
             }
         });
     }
