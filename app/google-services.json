@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "499400016950",
+    "firebase_url": "https://donationstracker-b4cb6.firebaseio.com",
+    "project_id": "donationstracker-b4cb6",
+    "storage_bucket": "donationstracker-b4cb6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:499400016950:android:ed75a6e318dcb6cf",
+        "android_client_info": {
+          "package_name": "com.example.sotw.donationtracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "499400016950-npsdgek4sqqmiu5kbdkljc72cnbqqs2k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBnoSXxFL1T_ejixz90FH8_VFW_2WuHLI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
