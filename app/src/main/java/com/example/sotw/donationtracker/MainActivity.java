@@ -8,6 +8,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
     private Button loginButton;
+    private Button registerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         loginButton = (Button) findViewById(R.id.button);
+        registerButton = (Button) findViewById(R.id.button3);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -22,6 +24,15 @@ public class MainActivity extends AppCompatActivity {
                 Intent loginIntent = new Intent(getApplicationContext(), login.class);
 
                 startActivity(loginIntent);
+            }
+        });
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent registrationIntent = new Intent(getApplicationContext(), registration.class);
+
+                startActivity(registrationIntent);
             }
         });
     }
