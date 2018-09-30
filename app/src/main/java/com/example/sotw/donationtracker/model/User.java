@@ -2,20 +2,21 @@ package com.example.sotw.donationtracker.model;
 
 public class User {
     private String name;
-    private String id;
+    private String email;
     private String password;
+
     //might have to change this to an enum later
     private String userType;
 
     public User(String name, String id, String password, String userType) {
         this.name = name;
-        this.id = id;
+        this.email = id;
         this.password = password;
         this.userType = userType;
     }
 
-    public String getId() {
-        return id;
+    public String getEmail() {
+        return email;
     }
 
     public String getName() {
@@ -30,8 +31,8 @@ public class User {
         return userType;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setName(String name) {

@@ -3,6 +3,7 @@ package com.example.sotw.donationtracker.controllers;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -20,7 +21,7 @@ public class registration extends AppCompatActivity {
      * UI elements
      */
     private EditText name;
-    private EditText ID;
+    private EditText email;
     private EditText password;
     private Spinner spinner;
 
@@ -28,7 +29,7 @@ public class registration extends AppCompatActivity {
      * Usefule objects
      */
     private User user;              //User Object
-    private FirebaseAuth mAuth;     //
+    private FirebaseAuth mAuth;     //Firebase Autherization object
 
 
     @Override
@@ -36,9 +37,10 @@ public class registration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
         name = findViewById(R.id.name);
-        ID = findViewById(R.id.id);
+        email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         spinner = findViewById(R.id.spinner);
+
         String[] spinnerValues = new String[] {"Pick a type of user","User", "Location Employee", "Admin"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, spinnerValues);
@@ -63,23 +65,54 @@ public class registration extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                user = new User(name.getText().toString(), ID.getText().toString(),
-                        password.getText().toString(), spinner.getSelectedItem().toString());
-                if (!user.getName().equals("") && !user.getId().equals("") &&
-                        !user.getPassword().equals("") &&
-                        !user.getUserType().equals("Pick a type of user")) {
+                // A good principle in software engineering is the error ladder
+                //Just check for errors first/incorrect inputs, and then do things
+                if(invalidName(name.getText().toString())){
+                    TextView failed = findViewById(R.id.failed);
+                    failed.setText("Please Enter a Valid Name");
+
+                }else if(invalidEmail(email.getText().toString())){
+
+                    TextView failed = findViewById(R.id.failed);
+                    failed.setText("Please Enter a Valid Email");
+
+                }else if(invalidPassword(password.getText().toString())){
+                    TextView failed = findViewById(R.id.failed);
+                    failed.setText("Please Enter a Valid Password");
+                }else if(spinner.getSelectedItem().toString().equals("Pick a type of user")){
+                    TextView failed = findViewById(R.id.failed);
+                    failed.setText("Please Select a User Type");
+                } else{
+                    //create a new user
+                    //Now time for firebase Stuff=
+                    user = new User(name.getText().toString(), email.getText().toString(),
+                            password.getText().toString(), spinner.getSelectedItem().toString());
+
                     Intent registerIntent = new Intent(getApplicationContext(),
                             RegisteredActivity.class);
                     startActivity(registerIntent);
-                } else {
-                    TextView failed = findViewById(R.id.failed);
-                    failed.setText("Please enter valid information in each box");
                 }
             }
 
         });
 
 
+    }
+
+
+    private boolean invalidPassword(String password){
+        //Validation logic from some framework
+        //for now
+        return password.equals("");
+    }
+
+    private boolean invalidEmail(String email){
+        //Validation logic from some framework
+        //for now
+        return email.equals("");
+    }
+    private boolean invalidName(String name){
+        return name.equals("") || name.length() <=2;
     }
 
 
