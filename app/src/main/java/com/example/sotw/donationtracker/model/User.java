@@ -1,4 +1,4 @@
-package com.example.sotw.donationtracker;
+package com.example.sotw.donationtracker.model;
 
 public class User {
     private String name;

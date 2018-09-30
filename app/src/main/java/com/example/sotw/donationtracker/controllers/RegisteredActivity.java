@@ -1,7 +1,9 @@
-package com.example.sotw.donationtracker;
+package com.example.sotw.donationtracker.controllers;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.sotw.donationtracker.R;
 
 public class RegisteredActivity extends AppCompatActivity {
 
