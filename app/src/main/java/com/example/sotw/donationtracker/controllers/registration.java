@@ -1,4 +1,4 @@
-package com.example.sotw.donationtracker;
+package com.example.sotw.donationtracker.controllers;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,15 +10,25 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.sotw.donationtracker.R;
+import com.example.sotw.donationtracker.model.User;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class registration extends AppCompatActivity {
+    /**
+     * UI elements
+     */
     private EditText name;
     private EditText ID;
     private EditText password;
     private Spinner spinner;
 
-    private User user;
+    /**
+     * Usefule objects
+     */
+    private User user;              //User Object
+    private FirebaseAuth mAuth;     //
 
 
     @Override
@@ -30,14 +40,14 @@ public class registration extends AppCompatActivity {
         password = findViewById(R.id.password);
         spinner = findViewById(R.id.spinner);
         String[] spinnerValues = new String[] {"Pick a type of user","User", "Location Employee", "Admin"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, spinnerValues);
         spinner.setAdapter(adapter);
 
 
         Button registerButton = findViewById(R.id.button4);
         Button cancelButton = findViewById((R.id.button2));
-
+        mAuth = FirebaseAuth.getInstance();
 
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -48,7 +58,7 @@ public class registration extends AppCompatActivity {
 
             }
 
-    });
+        });
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +80,21 @@ public class registration extends AppCompatActivity {
         });
 
 
+    }
+
+
+
+
+
+    /**
+     * Suggestion from Firebase guide
+     */
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        //Do somethin
     }
 }
 
