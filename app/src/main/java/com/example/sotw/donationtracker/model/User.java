@@ -8,6 +8,10 @@ public class User {
     //might have to change this to an enum later
     private String userType;
 
+    public User(){
+        //Required for a firebase thing called Data Snapshot
+    }
+
     public User(String name, String id, String password, String userType) {
         this.name = name;
         this.email = id;
