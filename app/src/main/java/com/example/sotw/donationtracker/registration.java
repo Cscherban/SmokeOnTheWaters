@@ -1,4 +1,4 @@
-package com.example.sotw.donationtracker.controllers;
+package com.example.sotw.donationtracker;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -12,8 +12,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.support.annotation.NonNull;
 
-import com.example.sotw.donationtracker.R;
-import com.example.sotw.donationtracker.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,9 +19,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class registration extends AppCompatActivity {
@@ -38,7 +33,7 @@ public class registration extends AppCompatActivity {
     /**
      * Useful objects
      */
-    private User user;              //User Object
+    public Actor user;              //User Object
     private FirebaseAuth mAuth;     //Firebase Autherization object
     private DatabaseReference ref; //Reference to the DB..to let us modify it
 
@@ -55,7 +50,7 @@ public class registration extends AppCompatActivity {
         password = findViewById(R.id.password);
         spinner = findViewById(R.id.spinner);
 
-        String[] spinnerValues = new String[] {"Pick a type of user","User", "Location Employee", "Branch Manager","Admin"};
+        String[] spinnerValues = new String[]{"Pick a type of user", "User", "Location Employee", "Branch Manager", "Admin"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, spinnerValues);
         spinner.setAdapter(adapter);
@@ -84,31 +79,42 @@ public class registration extends AppCompatActivity {
 
                 //Grab the textview, its not expensive
                 TextView failed = findViewById(R.id.failed);
-                if(invalidName(name.getText().toString())){
+                if (!invalidName(name.getText().toString()) &&
+                        !invalidEmail(email.getText().toString()) &&
+                        !invalidPassword(password.getText().toString()) &&
+                        !spinner.getSelectedItem().toString().equals("Pick a type of user")) {
+                    if (spinner.getSelectedItem().equals("User")) {
+                        user = new User(name.getText().toString(), email.getText().toString(),
+                                password.getText().toString(), spinner.getSelectedItem().toString());
+                    } else if (spinner.getSelectedItem().equals("LocationEmployee")) {
+                        user = new LocationEmployee(name.getText().toString(), email.getText().toString(),
+                                password.getText().toString(), spinner.getSelectedItem().toString());
+                    } else if (spinner.getSelectedItem().equals("Branch Manager")) {
+                        user = new BranchManager(name.getText().toString(), email.getText().toString(),
+                                password.getText().toString(), spinner.getSelectedItem().toString());
+                    } else {
+                        user = new Admin(name.getText().toString(), email.getText().toString(),
+                                password.getText().toString(), spinner.getSelectedItem().toString());
 
-                    failed.setText("Please Enter a Valid Name");
-
-                }else if(invalidEmail(email.getText().toString())){
-
-                    failed.setText("Please Enter a Valid Email");
-
-                }else if(invalidPassword(password.getText().toString())){
-
-                    failed.setText("Please Enter a Valid Password");
-
-                }else if(spinner.getSelectedItem().toString().equals("Pick a type of user")){
-
-                    failed.setText("Please Select a User Type");
-                } else{
-                    //create a new user
-                    //Now time for firebase Stuff=
-                    user = new User(name.getText().toString(), email.getText().toString(),
-                            password.getText().toString(), spinner.getSelectedItem().toString());
-
+                    }
+                    Intent registeredIntent = new Intent(getApplicationContext(), RegisteredActivity.class);
                     firstAuthentication(user);
+                    registeredIntent.putExtra("userType", user.getUserType());
+                    registeredIntent.putExtra("name", user.getName());
+                    registeredIntent.putExtra("e-mail", user.getEmail());
+                    startActivity(registeredIntent);
+
+
 
                 }
+                    else {
+
+                    failed.setText("Invalid information. Please try again");
+                }
+
+
             }
+
 
         });
 
@@ -133,7 +139,7 @@ public class registration extends AppCompatActivity {
 
 
 
-    private boolean createUserInDB(User user,FirebaseUser firebaseUser){
+    private boolean createUserInDB(Actor user,FirebaseUser firebaseUser){
         DatabaseReference usersRef = ref.child("users");
 
         //Two ways of modifying the DB... Useful for you reading over this code
@@ -153,7 +159,7 @@ public class registration extends AppCompatActivity {
         return true;
     }
 
-    private void firstAuthentication(final User user){
+    private void firstAuthentication(final Actor user){
         mAuth.createUserWithEmailAndPassword(user.getEmail(),user.getPassword())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
 
