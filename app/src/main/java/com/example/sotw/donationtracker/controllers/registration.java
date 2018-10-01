@@ -55,7 +55,7 @@ public class registration extends AppCompatActivity {
         password = findViewById(R.id.password);
         spinner = findViewById(R.id.spinner);
 
-        String[] spinnerValues = new String[] {"Pick a type of user","User", "Location Employee", "Admin"};
+        String[] spinnerValues = new String[] {"Pick a type of user","User", "Location Employee", "Branch Manager","Admin"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, spinnerValues);
         spinner.setAdapter(adapter);
