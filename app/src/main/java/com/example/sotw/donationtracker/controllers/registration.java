@@ -92,7 +92,7 @@ public class registration extends AppCompatActivity {
                     if (spinner.getSelectedItem().equals("User")) {
                         user = new User(name.getText().toString(), email.getText().toString(),
                                 password.getText().toString(), spinner.getSelectedItem().toString());
-                    } else if (spinner.getSelectedItem().equals("LocationEmployee")) {
+                    } else if (spinner.getSelectedItem().equals("Location Employee")) {
                         user = new LocationEmployee(name.getText().toString(), email.getText().toString(),
                                 password.getText().toString(), spinner.getSelectedItem().toString());
                     } else if (spinner.getSelectedItem().equals("Branch Manager")) {
