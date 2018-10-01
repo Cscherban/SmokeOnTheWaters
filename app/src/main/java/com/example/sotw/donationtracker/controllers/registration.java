@@ -1,4 +1,4 @@
-package com.example.sotw.donationtracker;
+package com.example.sotw.donationtracker.controllers;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +12,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.support.annotation.NonNull;
 
+import com.example.sotw.donationtracker.R;
+import com.example.sotw.donationtracker.model.LocationEmployee;
+import com.example.sotw.donationtracker.model.User;
+import com.example.sotw.donationtracker.model.Actor;
+import com.example.sotw.donationtracker.model.Admin;
+import com.example.sotw.donationtracker.model.BranchManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;

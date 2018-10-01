@@ -1,29 +1,31 @@
-package com.example.sotw.donationtracker;
+package com.example.sotw.donationtracker.model;
 
-import com.example.sotw.donationtracker.Actor;
+import com.example.sotw.donationtracker.model.Actor;
 
-public class Admin extends Actor {
+public class BranchManager extends Actor {
     private String name;
     private String email;
     private String password;
-    private String userType = "Admin";
+    private String userType = "Branch Manager";
 
-
-    public Admin(){
+    public BranchManager(){
         //Required for a firebase thing called Data Snapshot
     }
 
-    public Admin(String name, String id, String password, String userType) {
+    public BranchManager(String name, String id, String password, String userType) {
         this.name = name;
         this.email = id;
         this.password = password;
     }
 
+
     public String getEmail() {
         return email;
     }
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
     public String getPassword() {
         return password;
@@ -31,7 +33,7 @@ public class Admin extends Actor {
 
     public String getUserType() {
         return userType;
-    };
+    }
 
 
     public void setEmail(String email) {

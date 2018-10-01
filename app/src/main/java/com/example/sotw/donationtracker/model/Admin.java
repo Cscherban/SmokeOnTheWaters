@@ -1,19 +1,19 @@
-package com.example.sotw.donationtracker;
+package com.example.sotw.donationtracker.model;
 
-import com.example.sotw.donationtracker.Actor;
+import com.example.sotw.donationtracker.model.Actor;
 
-public class User extends Actor {
+public class Admin extends Actor {
     private String name;
     private String email;
     private String password;
+    private String userType = "Admin";
 
-    private String userType = "User";
 
-    public User(){
+    public Admin(){
         //Required for a firebase thing called Data Snapshot
     }
 
-    public User(String name, String id, String password, String userType) {
+    public Admin(String name, String id, String password, String userType) {
         this.name = name;
         this.email = id;
         this.password = password;
@@ -31,7 +31,7 @@ public class User extends Actor {
 
     public String getUserType() {
         return userType;
-    }
+    };
 
 
     public void setEmail(String email) {
@@ -45,7 +45,5 @@ public class User extends Actor {
     public void setPassword(String password) {
         this.password = password;
     }
-
-
 
 }

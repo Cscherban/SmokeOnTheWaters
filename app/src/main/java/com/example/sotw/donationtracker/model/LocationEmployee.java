@@ -1,4 +1,6 @@
-package com.example.sotw.donationtracker;
+package com.example.sotw.donationtracker.model;
+
+import com.example.sotw.donationtracker.model.User;
 
 public class LocationEmployee extends User {
     private String name;

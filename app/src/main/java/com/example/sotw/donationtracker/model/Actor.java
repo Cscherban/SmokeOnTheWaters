@@ -1,4 +1,4 @@
-package com.example.sotw.donationtracker;
+package com.example.sotw.donationtracker.model;
 
 public abstract class Actor {
     private String name;
