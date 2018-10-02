@@ -84,38 +84,49 @@ public class registration extends AppCompatActivity {
                 //Just check for errors first/incorrect inputs, and then do things
 
                 //Grab the textview, its not expensive
+
+
                 TextView failed = findViewById(R.id.failed);
-                if (!invalidName(name.getText().toString()) &&
-                        !invalidEmail(email.getText().toString()) &&
-                        !invalidPassword(password.getText().toString()) &&
-                        !spinner.getSelectedItem().toString().equals("Pick a type of user")) {
+                if(invalidName(name.getText().toString())){
+                    failed.setText("Please Enter a Name");
+
+                }else if(invalidEmail(email.getText().toString())){
+                    failed.setText("Please Enter an Email");
+
+                }else if(invalidPassword(password.getText().toString())) {
+                    failed.setText("Please Enter a valid password");
+
+                }else if(spinner.getSelectedItem().toString().equals("Pick a type of user")){
+                    failed.setText("Please Enter a value into the Spinner");
+                }else{
+
                     if (spinner.getSelectedItem().equals("User")) {
                         user = new User(name.getText().toString(), email.getText().toString(),
                                 password.getText().toString(), spinner.getSelectedItem().toString());
+
+                        Log.d("Success", "CreatedUser:success");
+
                     } else if (spinner.getSelectedItem().equals("Location Employee")) {
                         user = new LocationEmployee(name.getText().toString(), email.getText().toString(),
                                 password.getText().toString(), spinner.getSelectedItem().toString());
+                        Log.d("Success", "CreatedLocationEmployee:success");
+
                     } else if (spinner.getSelectedItem().equals("Branch Manager")) {
                         user = new BranchManager(name.getText().toString(), email.getText().toString(),
                                 password.getText().toString(), spinner.getSelectedItem().toString());
+
+                        Log.d("Success", "CreatedBranchManager:success");
+
                     } else {
                         user = new Admin(name.getText().toString(), email.getText().toString(),
                                 password.getText().toString(), spinner.getSelectedItem().toString());
 
+                        Log.d("Success", "CreatedAdmin:success");
+
                     }
-                    Intent registeredIntent = new Intent(getApplicationContext(), RegisteredActivity.class);
+
                     firstAuthentication(user);
-                    registeredIntent.putExtra("userType", user.getUserType());
-                    registeredIntent.putExtra("name", user.getName());
-                    registeredIntent.putExtra("e-mail", user.getEmail());
-                    startActivity(registeredIntent);
 
-
-
-                }
-                    else {
-
-                    failed.setText("Invalid information. Please try again");
                 }
 
 
@@ -147,6 +158,7 @@ public class registration extends AppCompatActivity {
 
     private boolean createUserInDB(Actor user,FirebaseUser firebaseUser){
         DatabaseReference usersRef = ref.child("users");
+        Log.d("DB", "DBInteraction:started");
 
         //Two ways of modifying the DB... Useful for you reading over this code
         /*
@@ -166,6 +178,8 @@ public class registration extends AppCompatActivity {
     }
 
     private void firstAuthentication(final Actor user){
+        Log.d("Authentication", "AuthenticationStarted:success");
+
         mAuth.createUserWithEmailAndPassword(user.getEmail(),user.getPassword())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
 
@@ -178,9 +192,12 @@ public class registration extends AppCompatActivity {
 
                             //Create the User in the DB
                             if(createUserInDB(user,fireBaseUser)){
-                                Intent registerIntent = new Intent(getApplicationContext(),
-                                        RegisteredActivity.class);
-                                startActivity(registerIntent);
+
+                                Intent registeredIntent = new Intent(getApplicationContext(), RegisteredActivity.class);
+                                registeredIntent.putExtra("userType", user.getUserType());
+                                registeredIntent.putExtra("name", user.getName());
+                                registeredIntent.putExtra("e-mail", user.getEmail());
+                                startActivity(registeredIntent);
                                 Log.d("Success", "DBCreationTask:success");
 
                             }else{
