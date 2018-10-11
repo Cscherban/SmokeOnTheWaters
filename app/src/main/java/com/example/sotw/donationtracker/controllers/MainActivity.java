@@ -11,6 +11,7 @@ import com.example.sotw.donationtracker.R;
 public class MainActivity extends AppCompatActivity {
     private Button loginButton;
     private Button registerButton;
+    private Button locationButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         loginButton = (Button) findViewById(R.id.button);
         registerButton = (Button) findViewById(R.id.button3);
+        locationButton = (Button) findViewById(R.id.LocationButton);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +37,15 @@ public class MainActivity extends AppCompatActivity {
                 Intent registrationIntent = new Intent(getApplicationContext(), registration.class);
 
                 startActivity(registrationIntent);
+            }
+        });
+
+        locationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent locationIntent = new Intent(getApplicationContext(), LocationDetailActivity.class);
+
+                startActivity(locationIntent);
             }
         });
     }

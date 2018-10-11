@@ -21,7 +21,8 @@
         <activity android:name=".controllers.login" />
         <activity android:name=".controllers.Account" />
         <activity android:name=".controllers.registration" />
-        <activity android:name=".controllers.RegisteredActivity"></activity>
+        <activity android:name=".controllers.RegisteredActivity" />
+        <activity android:name=".controllers.LocationDetailActivity"></activity>
     </application>
 
 </manifest>
