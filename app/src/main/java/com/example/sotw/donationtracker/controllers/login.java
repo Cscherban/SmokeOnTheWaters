@@ -1,4 +1,4 @@
-package com.example.sotw.donationtracker;
+package com.example.sotw.donationtracker.controllers;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.sotw.donationtracker.R;
+import com.example.sotw.donationtracker.controllers.Account;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -82,9 +84,11 @@ public class login extends AppCompatActivity {
                 Intent nextScreen = new Intent(getApplicationContext(), Account.class);
                 String email = username.getText().toString();
                 String pass = password.getText().toString();
-
-                attemptLogin(email, pass);
-
+                if (email.equals("") && pass.equals("")) {
+                    failure();
+                } else {
+                    attemptLogin(email, pass);
+                }
             }
         });
     }
