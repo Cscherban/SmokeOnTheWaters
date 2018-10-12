@@ -1,32 +1,42 @@
 package com.example.sotw.donationtracker.DBLoader;
 
+import android.content.Context;
+
+import com.example.sotw.donationtracker.R;
 import com.example.sotw.donationtracker.model.Location;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
 public class loadLocations {
+    private  static FirebaseAuth mAuth;     //Firebase Autherization object
+    private  static DatabaseReference ref;
 
-    static List<Location> parseCSV(String filename){
+    private  static List<Location> parseCSV(Context context, String filename){
         List<Location> locations = new ArrayList<>();
         BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ",";
 
         try {
+            InputStream is = context.getResources().openRawResource(R.raw.locationdata);
 
-            br = new BufferedReader(new FileReader(filename));
+            br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
             line = br.readLine(); //read/ignore first line
             while ((line = br.readLine()) != null) {
 
                 // use comma as separator
                 String[] data = line.split(cvsSplitBy);
+                String key = data[0];
                 String name = data[1];
                 String address = data[4] + " " + data[5] + " " + data[6] + " " + data[7];
                 float latitude = Float.parseFloat(data[2]);
@@ -36,7 +46,7 @@ public class loadLocations {
                 String website = data[10];
 
 
-                locations.add(new Location(name,address,latitude,longitude,type,phone));
+                locations.add(new Location(key,name,address,latitude,longitude,type,phone,website));
 
 
             }
@@ -60,26 +70,25 @@ public class loadLocations {
         return locations;
     }
 
-    static void putIntoFirebase(List<Location> locations){
+    private static void putIntoFirebase(List<Location> locations){
 
-        DatabaseReference ref; //Reference to the DB..to let us modify it
-        ref = FirebaseDatabase.getInstance().getReference();
+        //Reference to the DB..to let us modify it
         DatabaseReference locationsRef = ref.child("locations");
-
 
         for(Location location : locations){
             //Firebase magic
-            //locationsRef.child(location.getKey()).setValue(location);
-
-            System.out.println(location);
+            locationsRef.child(location.getKey()).setValue(location);
         }
 
     }
 
-    public static void main(String[] args){
+    public static void doSomething(Context context){
+        ref = FirebaseDatabase.getInstance().getReference();
+
+
         //Absolute path, ugly yes. but idk any other way for now
-        String location = "/Users/scherban/Desktop/school/2340/SmokeOnTheWaters/SmokeOnTheWaters/app/src/main/java/com/example/sotw/donationtracker/DBLoader/LocationData.csv";
-        List<Location> locations = parseCSV(location);
+        String location = "/sdcard" + "/Download/locationdata.csv";
+        List<Location> locations = parseCSV(context, location);
         putIntoFirebase(locations);
 
     }
