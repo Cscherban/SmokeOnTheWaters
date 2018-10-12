@@ -2,20 +2,24 @@ package com.example.sotw.donationtracker.model;
 
 public class Location {
 
+    private String key;
     private String name;
     private String address;
     private float latitude;
     private float longitude;
     private String type;
     private String phone;
+    private String website;
 
-    public Location(String name, String address, float latitude, float longitude, String type, String phone) {
+    public Location(String key, String name, String address, float latitude, float longitude, String type, String phone, String website) {
+        this.key = key;
         this.name = name;
         this.address = address;
         this.latitude = latitude;
         this.longitude = longitude;
         this.type = type;
         this.phone = phone;
+        this.website = website;
     }
 
     public String getName() {
