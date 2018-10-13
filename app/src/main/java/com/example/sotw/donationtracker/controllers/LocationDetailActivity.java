@@ -62,6 +62,11 @@ public class LocationDetailActivity extends AppCompatActivity {
                     locationsArrayList.add(boi);
                 }
 
+                Log.d("No huge errors","got to this step");
+                listAdapter = new MyAdapter(locationsArrayList);
+                locationList.setAdapter(listAdapter);
+                Log.d("array sizE", "" + locationsArrayList.size());
+
                 //populate fields with the locations
                 //populateFields(locationsArrayList);
             }
@@ -72,12 +77,7 @@ public class LocationDetailActivity extends AppCompatActivity {
 
             }
         });
-        Log.d("No huge errors","got to this step");
-        locationsArrayList.add(new Location("1","nick","address",867.4f,443.1f,"dropoff","8479512285","http"));
-        locationsArrayList.add(new Location("2","spoof","fake",000.0f,000.0f,"notreal","9999999999","sqlinjection.com"));
-        Log.d("array sizE", "" + locationsArrayList.size());
-        listAdapter = new MyAdapter(locationsArrayList);
-        locationList.setAdapter(listAdapter);
+
     }
 
     public static Location getPublicLocation() {
