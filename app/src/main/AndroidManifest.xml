@@ -3,6 +3,8 @@
     package="com.example.sotw.donationtracker">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -22,7 +24,8 @@
         <activity android:name=".controllers.Account" />
         <activity android:name=".controllers.registration" />
         <activity android:name=".controllers.RegisteredActivity" />
-        <activity android:name=".controllers.LocationDetailActivity"></activity>
+        <activity android:name=".controllers.LocationDetailActivity" />
+        <activity android:name=".controllers.LocationActivity"></activity>
     </application>
 
 </manifest>

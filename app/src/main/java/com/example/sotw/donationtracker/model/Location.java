@@ -11,14 +11,19 @@ public class Location {
     private String phone;
     private String website;
 
-    public Location(String key, String name, String address, float latitude, float longitude, String type, String phone, String website) {
-        this.key = key;
+
+    public Location(){
+
+    }
+
+    public Location(String key,String name, String address, float latitude, float longitude, String type, String phone,String website) {
         this.name = name;
         this.address = address;
         this.latitude = latitude;
         this.longitude = longitude;
         this.type = type;
         this.phone = phone;
+        this.key = key;
         this.website = website;
     }
 
@@ -70,9 +75,18 @@ public class Location {
         this.phone = phone;
     }
 
+    public String getKey(){return this.key;}
+
+    public void setKey(String newKey){ this.key = newKey; }
+
+    public void setWebsite(String website){this.website = website;}
+
+    public String getWebsite(){return this.website;}
+
+
+
     @Override
     public String toString() {
-        return "Name: " + name + ", Address: " + address + ", Latitude: " + latitude + ", Longitude: " + longitude
-                + ", Type: " + type + ", Phone Number: " + phone + ".";
+        return key + ": " + name;
     }
 }
