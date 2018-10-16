@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.sotw.donationtracker.DBLoader.loadLocations;
 import com.example.sotw.donationtracker.R;
 
 public class MainActivity extends AppCompatActivity {
     private Button loginButton;
     private Button registerButton;
+    private Button locationButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         loginButton = (Button) findViewById(R.id.button);
         registerButton = (Button) findViewById(R.id.button3);
+        locationButton = (Button) findViewById(R.id.LocationButton);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,6 +40,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(registrationIntent);
             }
         });
+
+        locationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent locationIntent = new Intent(getApplicationContext(), LocationDetailActivity.class);
+
+                startActivity(locationIntent);
+            }
+        });
+
+        // /loadLocations.doSomething(this);
+
     }
 
 

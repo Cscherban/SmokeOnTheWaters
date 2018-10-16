@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -171,7 +172,6 @@ public class registration extends AppCompatActivity {
         */
 
         //Since I only care about putting a single user in the DB
-
         usersRef.child(firebaseUser.getUid()).setValue(user);
 
         return true;
@@ -210,7 +210,7 @@ public class registration extends AppCompatActivity {
                             // If sign in fails, display a message to the user.
                             Log.w("Failure", "createUserWithEmail:failure", task.getException());
                             TextView failed = findViewById(R.id.failed);
-                            failed.setText("Something Went Wrong, Please Try Again");
+                            failed.setText(task.getException().toString());
                         }
 
                     }
