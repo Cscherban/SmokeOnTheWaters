@@ -182,46 +182,5 @@ public class LocationDetailActivity extends AppCompatActivity {
             }
         }
     }
-/**
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
-        private List<Location> locations;
-
-        public class MyViewHolder extends RecyclerView.ViewHolder {
-            public TextView theText;
-            public MyViewHolder(TextView v) {
-                super(v);
-                theText = v;
-            }
-        }
-
-        public MyAdapter(List<Location> locations) {
-            this.locations = locations;
-        }
-
-        @Override
-        public MyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewtype) {
-            TextView v = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.location_content, parent, false);
-
-            MyViewHolder vh = new MyViewHolder(v);
-            return vh;
-        }
-
-        @Override
-        public void onBindViewHolder(MyViewHolder holder, int position) {
-            holder.theText.setText(locations.get(position).getName());
-        }
-
-        public int getItemCount() {
-            return locations.size();
-        }
-    }
-
-    public void populateFields(List<Location> locations){
-        //Do something
-        Log.d("Firebase","PopulateViewInit:success");
-
-    }
-
-*/
 }
