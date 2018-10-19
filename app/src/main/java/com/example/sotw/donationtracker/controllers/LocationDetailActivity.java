@@ -94,7 +94,7 @@ public class LocationDetailActivity extends AppCompatActivity {
 
         /**
          * set the items to be used by the adapter
-         * @param items the list of items to be displayed in the recycler view
+             * @param items the list of items to be displayed in the recycler view
          */
         public MyAdapter(List<Location> items) {
             mLocations = items;

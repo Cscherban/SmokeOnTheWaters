@@ -33,15 +33,21 @@ public class DonationListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donation_list);
-
+        Log.d("NickLog0", "Did it run?");
         donationList = (RecyclerView) findViewById(R.id.donations);
+        Log.d("NickLog0.1", "why");
         listLayout = new LinearLayoutManager(this);
+        Log.d("NickLog0.2", "android is agony");
         donationList.setLayoutManager(listLayout);
+        Log.d("NickLog0.3", "layouts are agony");
 
         OurModel model = OurModel.getInstance();
+        Log.d("NickLog0.4", "models are agony");
         List<DonationDropOff> donations = model.getDonations();
+        Log.d("NickLog0.5", donations.get(0).getLocation().getName());
         String locationName = getIntent().getStringExtra("locale");
         Log.d("NickLog", locationName);
+        filteredDonations = new ArrayList<>();
         for (int i = 0; i < donations.size(); i++) {
             if (donations.get(i).getLocation().getName().equals(locationName)) {
                 filteredDonations.add(donations.get(i));

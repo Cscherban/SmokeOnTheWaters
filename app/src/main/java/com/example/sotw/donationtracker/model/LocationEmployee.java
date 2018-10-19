@@ -6,7 +6,8 @@ public class LocationEmployee extends User {
     private String name;
     private String email;
     private String password;
-    private String userType = "Location Emplyee";
+    private String userType = "Location Empolyee";
+    private Location location;
 
 
     public LocationEmployee(String name, String id, String password, String userType) {
@@ -31,6 +32,10 @@ public class LocationEmployee extends User {
         return userType;
     }
 
+    public Location getLocation() {
+        return location;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -45,5 +50,9 @@ public class LocationEmployee extends User {
 
     public void setUserType(String userType) {
         this.userType = userType;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }

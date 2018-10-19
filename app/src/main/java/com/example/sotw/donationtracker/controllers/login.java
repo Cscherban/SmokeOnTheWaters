@@ -1,6 +1,7 @@
 package com.example.sotw.donationtracker.controllers;
 
 import android.content.Intent;
+import android.os.Parcel;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,19 +12,22 @@ import android.widget.TextView;
 
 import com.example.sotw.donationtracker.R;
 import com.example.sotw.donationtracker.controllers.Account;
+import com.example.sotw.donationtracker.model.Actor;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.AuthResult;
-
-
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 import android.support.annotation.NonNull;
 
 public class login extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    private DatabaseReference ref; //Reference to the DB..to let us modify it
+
 
 
     /**
@@ -32,9 +36,16 @@ public class login extends AppCompatActivity {
      */
     private void success(FirebaseUser user){
         //Do Stuff with the firebase user
+        String uid = user.getUid();
+        DatabaseReference users = ref.child("users").child(uid);
 
-        Intent nextScreen = new Intent(getApplicationContext(), Account.class);
-        startActivity(nextScreen);
+
+        Intent LocationEmployeeScreen = new Intent(getApplicationContext(), LocationEmployeeActivity.class);
+        LocationEmployeeScreen.putExtra("locale", "location1");
+        startActivity(LocationEmployeeScreen);
+
+        //Intent nextScreen = new Intent(getApplicationContext(), Account.class);
+        //startActivity(nextScreen);
 
     }
 
@@ -57,6 +68,7 @@ public class login extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("Success Message", "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+
                             success(user);
                         }else {
                             failure();
@@ -72,6 +84,8 @@ public class login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
+        ref = FirebaseDatabase.getInstance().getReference();
+
 
         Button loginButton = (Button) findViewById(R.id.login);
 

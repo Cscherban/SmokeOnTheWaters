@@ -5,7 +5,7 @@ import android.media.Image;
 import java.time.LocalDateTime;
 
 public class DonationDropOff {
-    private LocalDateTime timestamp;
+    private String timestamp;
     private Location location;
     private String shortDescription;
     private String longDescription;
@@ -14,7 +14,7 @@ public class DonationDropOff {
     private String comments;
     private Image image;
 
-    DonationDropOff(LocalDateTime timestamp, Location location,
+    public DonationDropOff(String timestamp, Location location,
                     String shortDescription, String longDescription,
                     double value, Category category, String comments,
                     Image image) {
@@ -28,7 +28,7 @@ public class DonationDropOff {
         this.image = image;
     }
 
-    DonationDropOff(LocalDateTime timestamp, Location location,
+    public DonationDropOff(String timestamp, Location location,
                     String shortDescription, String longDescription,
                     double value, Category category) {
         this(timestamp, location, shortDescription, longDescription, value, category,
@@ -47,7 +47,7 @@ public class DonationDropOff {
         return image;
     }
 
-    public LocalDateTime getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
@@ -91,7 +91,7 @@ public class DonationDropOff {
         this.shortDescription = shortDescription;
     }
 
-    public void setTimestamp(LocalDateTime timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 

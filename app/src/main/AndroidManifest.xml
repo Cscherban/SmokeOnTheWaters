@@ -26,7 +26,10 @@
         <activity android:name=".controllers.RegisteredActivity" />
         <activity android:name=".controllers.LocationDetailActivity" />
         <activity android:name=".controllers.LocationActivity" />
-        <activity android:name=".controllers.DonationListActivity"></activity>
+        <activity android:name=".controllers.DonationListActivity" />
+        <activity android:name=".controllers.DonationActivity" />
+        <activity android:name=".controllers.LocationEmployeeActivity" />
+        <activity android:name=".controllers.AddDonationActivity"></activity>
     </application>
 
 </manifest>
