@@ -14,6 +14,10 @@ public class DonationDropOff {
     private String comments;
     private Image image;
 
+    private DonationDropOff(){
+
+    }
+
     public DonationDropOff(String timestamp, Location location,
                     String shortDescription, String longDescription,
                     double value, Category category, String comments,
