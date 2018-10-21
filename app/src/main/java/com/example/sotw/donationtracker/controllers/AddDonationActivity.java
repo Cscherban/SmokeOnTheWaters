@@ -10,6 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+
 import com.example.sotw.donationtracker.R;
 import com.example.sotw.donationtracker.model.Category;
 import com.example.sotw.donationtracker.model.DonationDropOff;
@@ -20,8 +25,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddDonationActivity extends AppCompatActivity {
+    private  static FirebaseAuth mAuth;     //Firebase Autherization object
+    private  static DatabaseReference ref =  FirebaseDatabase.getInstance().getReference();
 
     private Spinner categories;
+
+    private void addDonationToDB(DonationDropOff donation){
+
+
+        //get the key for locaiton in the db
+        String donationTimestamp = donation.getTimestamp();
+
+        //get a reference to where we want to write( which is making the donation a child of each location
+        DatabaseReference donationsRef = ref.child("donations");
+        donationsRef.child(donationTimestamp).setValue(donation);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +90,8 @@ public class AddDonationActivity extends AppCompatActivity {
 
 
                 DonationDropOff donation = new DonationDropOff(dateTime, location, shortDescription, longDescription, val, donationCategory);
+                addDonationToDB(donation);
+
                 OurModel model = OurModel.getInstance();
                 List<DonationDropOff> donationList = model.getDonations();
                 donationList.add(donation);
