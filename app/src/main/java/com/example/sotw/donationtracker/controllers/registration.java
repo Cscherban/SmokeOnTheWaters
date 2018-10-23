@@ -136,7 +136,10 @@ public class registration extends AppCompatActivity {
 
                 }else if(spinner.getSelectedItem().toString().equals("Pick a type of user")){
                     failed.setText("Please Enter a value into the Spinner");
-                }else{
+                } else if (spinner.getSelectedItem().toString().equals("Location Employee")
+                        && locationEmp.getSelectedItem().toString().equals("Pick a Location")) {
+                    failed.setText("Location Employees must have a valid location");
+                } else{
 
                     if (spinner.getSelectedItem().equals("User")) {
                         user = new User(name.getText().toString(), email.getText().toString(),
@@ -145,14 +148,11 @@ public class registration extends AppCompatActivity {
                         Log.d("Success", "CreatedUser:success");
 
                     } else if (spinner.getSelectedItem().equals("Location Employee")) {
-                        if (locationEmp.getSelectedItem().toString().equals("Pick a Location")) {
-                            failed.setText("Location Employees must have a valid location");
-                        } else {
+
                             user = new LocationEmployee(name.getText().toString(), email.getText().toString(),
                                     password.getText().toString(), spinner.getSelectedItem().toString(),
                                     (Location) locationEmp.getSelectedItem());
                             Log.d("Success", "CreatedLocationEmployee:success");
-                        }
 
                     } else if (spinner.getSelectedItem().equals("Branch Manager")) {
                         user = new BranchManager(name.getText().toString(), email.getText().toString(),
