@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,7 +14,9 @@ import android.widget.TextView;
 import android.support.annotation.NonNull;
 
 import com.example.sotw.donationtracker.R;
+import com.example.sotw.donationtracker.model.Location;
 import com.example.sotw.donationtracker.model.LocationEmployee;
+import com.example.sotw.donationtracker.model.OurModel;
 import com.example.sotw.donationtracker.model.User;
 import com.example.sotw.donationtracker.model.Actor;
 import com.example.sotw.donationtracker.model.Admin;
@@ -27,6 +30,8 @@ import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.List;
+
 
 public class registration extends AppCompatActivity {
     /**
@@ -36,6 +41,7 @@ public class registration extends AppCompatActivity {
     private EditText email;
     private EditText password;
     private Spinner spinner;
+    private Spinner locationEmp;
 
     /**
      * Useful objects
@@ -43,6 +49,7 @@ public class registration extends AppCompatActivity {
     public Actor user;              //User Object
     private FirebaseAuth mAuth;     //Firebase Autherization object
     private DatabaseReference ref; //Reference to the DB..to let us modify it
+    private OurModel ourModel;
 
 
     @Override
@@ -56,6 +63,18 @@ public class registration extends AppCompatActivity {
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         spinner = findViewById(R.id.spinner);
+        locationEmp = findViewById(R.id.locEmpSpinner);
+        ourModel = new OurModel();
+
+
+
+        List<Location> locations = ourModel.getLocations();
+        locations.add(0, new Location("Pick a Location"));
+        ArrayAdapter<Location> locationArrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, locations);
+        locationEmp.setAdapter(locationArrayAdapter);
+        locationEmp.setVisibility(View.GONE);
+
 
         String[] spinnerValues = new String[]{"Pick a type of user", "User", "Location Employee", "Branch Manager", "Admin"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
@@ -66,6 +85,24 @@ public class registration extends AppCompatActivity {
         Button registerButton = findViewById(R.id.button4);
         Button cancelButton = findViewById((R.id.button2));
         mAuth = FirebaseAuth.getInstance();
+
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if (spinner.getSelectedItem().toString().equals("Location Employee")) {
+                    locationEmp.setVisibility(View.VISIBLE);
+                } else {
+                    locationEmp.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
 
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -99,7 +136,10 @@ public class registration extends AppCompatActivity {
 
                 }else if(spinner.getSelectedItem().toString().equals("Pick a type of user")){
                     failed.setText("Please Enter a value into the Spinner");
-                }else{
+                } else if (spinner.getSelectedItem().toString().equals("Location Employee")
+                        && locationEmp.getSelectedItem().toString().equals("Pick a Location")) {
+                    failed.setText("Location Employees must have a valid location");
+                } else{
 
                     if (spinner.getSelectedItem().equals("User")) {
                         user = new User(name.getText().toString(), email.getText().toString(),
@@ -108,9 +148,11 @@ public class registration extends AppCompatActivity {
                         Log.d("Success", "CreatedUser:success");
 
                     } else if (spinner.getSelectedItem().equals("Location Employee")) {
-                        user = new LocationEmployee(name.getText().toString(), email.getText().toString(),
-                                password.getText().toString(), spinner.getSelectedItem().toString());
-                        Log.d("Success", "CreatedLocationEmployee:success");
+
+                            user = new LocationEmployee(name.getText().toString(), email.getText().toString(),
+                                    password.getText().toString(), spinner.getSelectedItem().toString(),
+                                    (Location) locationEmp.getSelectedItem());
+                            Log.d("Success", "CreatedLocationEmployee:success");
 
                     } else if (spinner.getSelectedItem().equals("Branch Manager")) {
                         user = new BranchManager(name.getText().toString(), email.getText().toString(),

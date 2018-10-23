@@ -91,6 +91,10 @@ public class Location {
 
     @Override
     public String toString() {
-        return key + ": " + name;
+        if (key != null) {
+            return key + ": " + name;
+        } else {
+            return name;
+        }
     }
 }
