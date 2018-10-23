@@ -114,57 +114,66 @@
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="215dp"
-        android:layout_height="34dp"
-        android:layout_marginBottom="189dp"
+        android:layout_width="211dp"
+        android:layout_height="42dp"
         android:layout_marginEnd="84dp"
         android:layout_marginStart="85dp"
         android:layout_marginTop="19dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="116dp"
-        android:layout_marginTop="25dp"
+        android:layout_width="92dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="33dp"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="10dp"
         android:text="Cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/failed"
         app:layout_constraintEnd_toStartOf="@+id/button4"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/locEmpSpinner" />
 
     <Button
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="116dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginBottom="68dp"
+        android:layout_marginEnd="88dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="10dp"
         android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/spinner"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/locEmpSpinner"
+        app:layout_constraintVertical_bias="0.8" />
 
     <TextView
         android:id="@+id/failed"
-        android:layout_width="231dp"
-        android:layout_height="32dp"
-        android:layout_marginBottom="73dp"
-        android:layout_marginEnd="93dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="11dp"
+        android:layout_width="211dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="88dp"
+        android:layout_marginStart="85dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/locEmpSpinner"
+        android:layout_width="211dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="86dp"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
 </android.support.constraint.ConstraintLayout>

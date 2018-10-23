@@ -16,6 +16,14 @@ public class LocationEmployee extends User {
         this.password = password;
         this.userType = userType;
     }
+
+    public LocationEmployee(String name, String id, String password, String userType, Location location) {
+        this.name = name;
+        this.email = id;
+        this.password = password;
+        this.userType = userType;
+        this.location = location;
+    }
     public String getEmail() {
         return email;
     }
