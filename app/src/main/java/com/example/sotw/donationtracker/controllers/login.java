@@ -63,7 +63,7 @@ public class login extends AppCompatActivity {
 
                 if((actor).getUserType().equals("Location Employee")){
                     Intent LocationEmployeeScreen = new Intent(getApplicationContext(), LocationEmployeeActivity.class);
-                    LocationEmployeeScreen.putExtra("locale", "AFD Station 4");
+                    LocationEmployeeScreen.putExtra("locale", actor.getLocation().getName());
                     startActivity(LocationEmployeeScreen);
                 }else{
                     Intent nextScreen = new Intent(getApplicationContext(), Account.class);

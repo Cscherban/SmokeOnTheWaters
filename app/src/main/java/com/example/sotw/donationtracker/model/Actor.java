@@ -5,16 +5,22 @@ public class Actor {
     private String email;
     private String password;
     private String userType = "Actor";
+    private Location location;
 
     public Actor() {
 
     }
 
     public Actor(String name, String id, String password, String userType) {
+        this(name, id, password, userType, null);
+    }
+
+    public Actor(String name, String id, String password, String userType, Location location) {
         this.name = name;
         this.email = id;
         this.password = password;
         this.userType = userType;
+        this.location = location;
     }
 
     public void setPassword(String password){
@@ -31,6 +37,10 @@ public class Actor {
         this.userType = type;
     }
 
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
     public String getPassword(){
         return password;
     }
@@ -42,5 +52,9 @@ public class Actor {
     }
     public String getUserType(){
         return this.userType;
+    }
+
+    public Location getLocation() {
+        return location;
     }
 }
