@@ -29,7 +29,15 @@
         <activity android:name=".controllers.DonationListActivity" />
         <activity android:name=".controllers.DonationActivity" />
         <activity android:name=".controllers.LocationEmployeeActivity" />
-        <activity android:name=".controllers.AddDonationActivity"></activity>
+        <activity android:name=".controllers.AddDonationActivity" />
+        <activity android:name=".controllers.UserActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".controllers.SearchActivity"></activity>
     </application>
 
 </manifest>
