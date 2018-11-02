@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     private Button loginButton;
     private Button registerButton;
     private Button locationButton;
+    private Button maps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,14 @@ public class MainActivity extends AppCompatActivity {
         loginButton = (Button) findViewById(R.id.button);
         registerButton = (Button) findViewById(R.id.button3);
         locationButton = (Button) findViewById(R.id.LocationButton);
+        maps = findViewById(R.id.MapView);
+
+        maps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), MapsView.class));
+            }
+        });
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
