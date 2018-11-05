@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.sotw.donationtracker.R;
+import com.example.sotw.donationtracker.model.Category;
 import com.example.sotw.donationtracker.model.DonationDropOff;
 import com.example.sotw.donationtracker.model.Location;
 import com.example.sotw.donationtracker.model.OurModel;
@@ -76,7 +77,7 @@ public class DonationListActivity extends AppCompatActivity {
                         }
                     }
                     if (filteredDonations.size() == 0) {
-                        filteredDonations.add(new DonationDropOff(null, null, "Nothing Found", null, 0, null));
+                        filteredDonations.add(new DonationDropOff("", new Location(""), "Nothing Found", "", 0, Category.Other));
                     }
                 } else {
                     String nameSearch = getIntent().getStringExtra("nameSearch");
@@ -87,7 +88,7 @@ public class DonationListActivity extends AppCompatActivity {
                         }
                     }
                     if (filteredDonations.size() == 0) {
-                        filteredDonations.add(new DonationDropOff(null, null, "Nothing Found", null, 0, null));
+                        filteredDonations.add(new DonationDropOff("", new Location(""), "Nothing Found", "", 0, Category.Other));
                     }
                 }
             }
