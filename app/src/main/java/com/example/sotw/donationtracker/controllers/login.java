@@ -66,7 +66,7 @@ public class login extends AppCompatActivity {
                     LocationEmployeeScreen.putExtra("locale", actor.getLocation().getName());
                     startActivity(LocationEmployeeScreen);
                 }else{
-                    Intent nextScreen = new Intent(getApplicationContext(), Account.class);
+                    Intent nextScreen = new Intent(getApplicationContext(), UserActivity.class);
                     startActivity(nextScreen);
                 }
                 //populate fields with the locations

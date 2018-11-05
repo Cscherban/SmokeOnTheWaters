@@ -1,5 +1,6 @@
 package com.example.sotw.donationtracker.controllers;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -49,7 +50,7 @@ public class SearchActivity extends AppCompatActivity {
 
 
         List<Location> locs = ourModel.getLocations();
-        locs.add(0, new Location("Add"));
+        locs.add(0, new Location("All"));
         ArrayAdapter<Location> locAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, locs);
         loc.setAdapter(locAdapter);
@@ -60,10 +61,20 @@ public class SearchActivity extends AppCompatActivity {
                 Location location = (Location) loc.getSelectedItem();
                 if (searchType.getSelectedItem().toString().equals("Category")) {
                     String cat = category.getSelectedItem().toString();
-
+                    Intent categorySearch = new Intent(getApplicationContext(), DonationListActivity.class);
+                    categorySearch.putExtra("locale", "searchForDonation");
+                    categorySearch.putExtra("location", location.getName());
+                    categorySearch.putExtra("type", "category");
+                    categorySearch.putExtra("categoryName", cat);
+                    startActivity(categorySearch);
                 } else if (searchType.getSelectedItem().toString().equals("Item Name")) {
                     String item = itemName.getText().toString();
-
+                    Intent nameSearch = new Intent(getApplicationContext(), DonationListActivity.class);
+                    nameSearch.putExtra("locale", "searchForDonation");
+                    nameSearch.putExtra("location", location.getName());
+                    nameSearch.putExtra("type", "name");
+                    nameSearch.putExtra("nameSearch", item);
+                    startActivity(nameSearch);
                 }
             }
         });

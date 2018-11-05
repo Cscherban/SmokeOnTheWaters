@@ -52,12 +52,18 @@ public class DonationListActivity extends AppCompatActivity {
                             filteredDonations.add(donations.get(i));
                         }
                     }
-                } else {
+                    if (filteredDonations.size() == 0) {
+                        filteredDonations.add(new DonationDropOff(null, null, "Nothing Found", null, 0, null));
+                    }
+                } else if (typeOfSearch.equals("name")) {
                     String nameSearch = getIntent().getStringExtra("nameSearch");
                     for (int i = 0; i < donations.size(); i++) {
                         if (donations.get(i).getShortDescription().equals(nameSearch)) {
                             filteredDonations.add(donations.get(i));
                         }
+                    }
+                    if (filteredDonations.size() == 0) {
+                        filteredDonations.add(new DonationDropOff(null, null, "Nothing Found", null, 0, null));
                     }
                 }
             } else {
@@ -65,17 +71,23 @@ public class DonationListActivity extends AppCompatActivity {
                     String categoryName = getIntent().getStringExtra("categoryName");
                     for (int i = 0; i < donations.size(); i++) {
                         if (donations.get(i).getCategory().getItem().equals(categoryName)
-                                && donations.get(i).getLocation().getName().equals(locationName)) {
+                                && donations.get(i).getLocation().getName().equals(newLocationName)) {
                             filteredDonations.add(donations.get(i));
                         }
+                    }
+                    if (filteredDonations.size() == 0) {
+                        filteredDonations.add(new DonationDropOff(null, null, "Nothing Found", null, 0, null));
                     }
                 } else {
                     String nameSearch = getIntent().getStringExtra("nameSearch");
                     for (int i = 0; i < donations.size(); i++) {
                         if (donations.get(i).getShortDescription().equals(nameSearch)
-                                && donations.get(i).getLocation().getName().equals(locationName)) {
+                                && donations.get(i).getLocation().getName().equals(newLocationName)) {
                             filteredDonations.add(donations.get(i));
                         }
+                    }
+                    if (filteredDonations.size() == 0) {
+                        filteredDonations.add(new DonationDropOff(null, null, "Nothing Found", null, 0, null));
                     }
                 }
             }
