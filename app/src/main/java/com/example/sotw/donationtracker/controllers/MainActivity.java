@@ -13,6 +13,8 @@ public class MainActivity extends AppCompatActivity {
     private Button loginButton;
     private Button registerButton;
     private Button locationButton;
+    private Button mapButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         loginButton = (Button) findViewById(R.id.button);
         registerButton = (Button) findViewById(R.id.button3);
         locationButton = (Button) findViewById(R.id.LocationButton);
+        mapButton = (Button) findViewById(R.id.mapButton);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +50,15 @@ public class MainActivity extends AppCompatActivity {
                 Intent locationIntent = new Intent(getApplicationContext(), LocationDetailActivity.class);
 
                 startActivity(locationIntent);
+            }
+        });
+
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mapIntent = new Intent(getApplicationContext(), MapsActivity.class);
+
+                startActivity(mapIntent);
             }
         });
 
