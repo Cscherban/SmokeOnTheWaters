@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.sotw.donationtracker.R;
+import com.example.sotw.donationtracker.model.Category;
 import com.example.sotw.donationtracker.model.DonationDropOff;
 import com.example.sotw.donationtracker.model.Location;
 import com.example.sotw.donationtracker.model.OurModel;
@@ -33,27 +34,71 @@ public class DonationListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donation_list);
-        Log.d("NickLog0", "Did it run?");
         donationList = (RecyclerView) findViewById(R.id.donations);
-        Log.d("NickLog0.1", "why");
         listLayout = new LinearLayoutManager(this);
-        Log.d("NickLog0.2", "android is agony");
         donationList.setLayoutManager(listLayout);
-        Log.d("NickLog0.3", "layouts are agony");
 
         OurModel model = OurModel.getInstance();
-        Log.d("NickLog0.4", "models are agony");
         List<DonationDropOff> donations = model.getDonations();
-        Log.d("NickLog0.5", donations.get(0).getLocation().getName());
         String locationName = getIntent().getStringExtra("locale");
-        Log.d("NickLog", locationName);
         filteredDonations = new ArrayList<>();
-        for (int i = 0; i < donations.size(); i++) {
-            if (donations.get(i).getLocation().getName().equals(locationName)) {
-                filteredDonations.add(donations.get(i));
+        if (locationName.equals("searchForDonation")) {
+            String newLocationName = getIntent().getStringExtra("location");
+            String typeOfSearch = getIntent().getStringExtra("type");
+            if (newLocationName.equals("All")) {
+                if (typeOfSearch.equals("category")) {
+                    String categoryName = getIntent().getStringExtra("categoryName");
+                    for (int i = 0; i < donations.size(); i++) {
+                        if (donations.get(i).getCategory().getItem().equals(categoryName)) {
+                            filteredDonations.add(donations.get(i));
+                        }
+                    }
+                    if (filteredDonations.size() == 0) {
+                        filteredDonations.add(new DonationDropOff(null, null, "Nothing Found", null, 0, null));
+                    }
+                } else if (typeOfSearch.equals("name")) {
+                    String nameSearch = getIntent().getStringExtra("nameSearch");
+                    for (int i = 0; i < donations.size(); i++) {
+                        if (donations.get(i).getShortDescription().equals(nameSearch)) {
+                            filteredDonations.add(donations.get(i));
+                        }
+                    }
+                    if (filteredDonations.size() == 0) {
+                        filteredDonations.add(new DonationDropOff(null, null, "Nothing Found", null, 0, null));
+                    }
+                }
+            } else {
+                if (typeOfSearch.equals("category")) {
+                    String categoryName = getIntent().getStringExtra("categoryName");
+                    for (int i = 0; i < donations.size(); i++) {
+                        if (donations.get(i).getCategory().getItem().equals(categoryName)
+                                && donations.get(i).getLocation().getName().equals(newLocationName)) {
+                            filteredDonations.add(donations.get(i));
+                        }
+                    }
+                    if (filteredDonations.size() == 0) {
+                        filteredDonations.add(new DonationDropOff("", new Location(""), "Nothing Found", "", 0, Category.Other));
+                    }
+                } else {
+                    String nameSearch = getIntent().getStringExtra("nameSearch");
+                    for (int i = 0; i < donations.size(); i++) {
+                        if (donations.get(i).getShortDescription().equals(nameSearch)
+                                && donations.get(i).getLocation().getName().equals(newLocationName)) {
+                            filteredDonations.add(donations.get(i));
+                        }
+                    }
+                    if (filteredDonations.size() == 0) {
+                        filteredDonations.add(new DonationDropOff("", new Location(""), "Nothing Found", "", 0, Category.Other));
+                    }
+                }
+            }
+        } else {
+            for (int i = 0; i < donations.size(); i++) {
+                if (donations.get(i).getLocation().getName().equals(locationName)) {
+                    filteredDonations.add(donations.get(i));
+                }
             }
         }
-        Log.d("NickLog2", filteredDonations.get(0).getShortDescription());
         listAdapter = new MyAdapter(filteredDonations);
         donationList.setAdapter(listAdapter);
 
