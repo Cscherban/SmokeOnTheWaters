@@ -40,11 +40,13 @@ public class LocationEmployeeActivity extends AppCompatActivity {
         showDon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent seeDonations = new Intent(getApplicationContext(), DonationListActivity.class);
+                Intent seeDonations =
+                        new Intent(getApplicationContext(), DonationListActivity.class);
+
                 seeDonations.putExtra("locale", locationName);
                 OurModel model = OurModel.getInstance();
                 List<DonationDropOff> donations = model.getDonations();
-                if (donations.size() != 0) {
+                if (!donations.isEmpty()) {
                     startActivity(seeDonations);
                 }
             }

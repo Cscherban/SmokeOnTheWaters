@@ -57,7 +57,7 @@ public class login extends AppCompatActivity {
 
                 Log.d("ACOTOAIHFDHSFAKHGS",actor.toString());
 
-                if((actor).getUserType().equals("Location Employee")){
+                if("Location Employee".equals((actor).getUserType())){
                     Intent LocationEmployeeScreen =
                             new Intent(getApplicationContext(), LocationEmployeeActivity.class);
                     LocationEmployeeScreen.putExtra("locale", actor.getLocation().getName());
@@ -133,7 +133,7 @@ public class login extends AppCompatActivity {
                 Intent nextScreen = new Intent(getApplicationContext(), Account.class);
                 String email = username.getText().toString();
                 String pass = password.getText().toString();
-                if (email.equals("") && pass.equals("")) {
+                if ("".equals(email) && "".equals(pass)) {
                     failure();
                 } else {
                     attemptLogin(email, pass);

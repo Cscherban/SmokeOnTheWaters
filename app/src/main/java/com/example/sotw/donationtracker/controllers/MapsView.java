@@ -30,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MapsView extends FragmentActivity implements OnMapReadyCallback {
@@ -37,7 +38,7 @@ public class MapsView extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private FirebaseDatabase database;
     private DatabaseReference reference;
-    private ArrayList<com.example.sotw.donationtracker.model.Location> locationList;
+    private List<com.example.sotw.donationtracker.model.Location> locationList;
 
     private double latitude;
     private double longitude;
@@ -100,12 +101,12 @@ public class MapsView extends FragmentActivity implements OnMapReadyCallback {
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ActivityCompat.checkSelfPermission(this,
+            if ((ActivityCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(this,
+                    != PackageManager.PERMISSION_GRANTED)
+                    && (ActivityCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_COARSE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED) {
+                    != PackageManager.PERMISSION_GRANTED) ){
 
                 requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
                                 Manifest.permission.ACCESS_FINE_LOCATION,
@@ -147,12 +148,13 @@ public class MapsView extends FragmentActivity implements OnMapReadyCallback {
                             Iterable<DataSnapshot> data = dataSnapshot.getChildren();
                             for (DataSnapshot d : data) {
                                 com.example.sotw.donationtracker.model.Location location =
-                                        d.getValue(com.example.sotw.donationtracker.model.Location.class);
+                                 d.getValue(com.example.sotw.donationtracker.model.Location.class);
 
                                 if(location != null) {
                                     Marker marker = mMap.addMarker(new MarkerOptions().position(
                                             new LatLng(location.getLatitude(),
-                                                    location.getLongitude())).title(location.getName()));
+                                                    location.getLongitude())).title(
+                                                                              location.getName()));
 
                                     marker.setTag(location.getKey());
                                     locationList.add(location);

@@ -60,7 +60,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Location location = (Location) loc.getSelectedItem();
-                if (searchType.getSelectedItem().toString().equals("Category")) {
+                if ("Category".equals(searchType.getSelectedItem())) {
                     String cat = category.getSelectedItem().toString();
 
                     Intent categorySearch
@@ -71,7 +71,7 @@ public class SearchActivity extends AppCompatActivity {
                     categorySearch.putExtra("type", "category");
                     categorySearch.putExtra("categoryName", cat);
                     startActivity(categorySearch);
-                } else if (searchType.getSelectedItem().toString().equals("Item Name")) {
+                } else if ("Item Name".equals(searchType.getSelectedItem())) {
                     String item = itemName.getText().toString();
 
                     Intent nameSearch

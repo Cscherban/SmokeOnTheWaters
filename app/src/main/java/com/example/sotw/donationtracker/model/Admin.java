@@ -36,7 +36,7 @@ public class Admin extends Actor {
     @Override
     public String getUserType() {
         return userType;
-    };
+    }
 
     @Override
     public void setEmail(String email) {

@@ -41,37 +41,37 @@ public class DonationListActivity extends AppCompatActivity {
         List<DonationDropOff> donations = model.getDonations();
         String locationName = getIntent().getStringExtra("locale");
         filteredDonations = new ArrayList<>();
-        if (locationName.equals("searchForDonation")) {
+        if ("searchForDonation".equals(locationName)) {
             String newLocationName = getIntent().getStringExtra("location");
             String typeOfSearch = getIntent().getStringExtra("type");
-            if (newLocationName.equals("All")) {
-                if (typeOfSearch.equals("category")) {
+            if ("All".equals(newLocationName)) {
+                if ("category".equals(typeOfSearch)) {
                     String categoryName = getIntent().getStringExtra("categoryName");
                     for (int i = 0; i < donations.size(); i++) {
                         if (donations.get(i).getCategory().getItem().equals(categoryName)) {
                             filteredDonations.add(donations.get(i));
                         }
                     }
-                    if (filteredDonations.size() == 0) {
+                    if (filteredDonations.isEmpty()) {
                         filteredDonations.add(new DonationDropOff(null,
                                 null, "Nothing Found",
                                 null, 0, null));
                     }
-                } else if (typeOfSearch.equals("name")) {
+                } else if ("name".equals(typeOfSearch)) {
                     String nameSearch = getIntent().getStringExtra("nameSearch");
                     for (int i = 0; i < donations.size(); i++) {
                         if (donations.get(i).getShortDescription().equals(nameSearch)) {
                             filteredDonations.add(donations.get(i));
                         }
                     }
-                    if (filteredDonations.size() == 0) {
+                    if (filteredDonations.isEmpty()) {
                         filteredDonations.add(new DonationDropOff(null,
                                                                 null, "Nothing Found",
                                                                 null, 0, null));
                     }
                 }
             } else {
-                if (typeOfSearch.equals("category")) {
+                if ("category".equals(typeOfSearch)) {
                     String categoryName = getIntent().getStringExtra("categoryName");
                     for (int i = 0; i < donations.size(); i++) {
                         if (donations.get(i).getCategory().getItem().equals(categoryName)
@@ -80,7 +80,7 @@ public class DonationListActivity extends AppCompatActivity {
                             filteredDonations.add(donations.get(i));
                         }
                     }
-                    if (filteredDonations.size() == 0) {
+                    if (filteredDonations.isEmpty()) {
                         filteredDonations.add(new DonationDropOff("",
                                                 new Location(""), "Nothing Found",
                                                 "", 0, Category.Other));
@@ -94,7 +94,7 @@ public class DonationListActivity extends AppCompatActivity {
                             filteredDonations.add(donations.get(i));
                         }
                     }
-                    if (filteredDonations.size() == 0) {
+                    if (filteredDonations.isEmpty()) {
                         filteredDonations.add(new DonationDropOff("", new Location(""),
                                             "Nothing Found", "",
                                             0, Category.Other));
