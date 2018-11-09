@@ -25,7 +25,7 @@ class loadLocations {
     private  static List<Location> parseCSV(Context context, String filename){
         List<Location> locations = new ArrayList<>();
         BufferedReader br = null;
-        String line = "";
+        String line;
         String cvsSplitBy = ",";
 
         try {
@@ -33,7 +33,7 @@ class loadLocations {
 
             br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
             br.readLine();
-            line = br.readLine(); //read/ignore first linebr.readLine();
+            line = br.readLine(); //read/ignore first line
             while (line != null) {
                 // use comma as separator
                 String[] data = line.split(cvsSplitBy);

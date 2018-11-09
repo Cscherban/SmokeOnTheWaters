@@ -53,6 +53,9 @@ public class login extends AppCompatActivity {
                 //get All datasnapshot objects from the "locations" document(aka table)
 
                 Actor actor = dataSnapshot.getValue(Actor.class);
+                if(actor == null){
+                    return;
+                }
                 Log.d("Firebase",actor.getClass().toString());
 
                 Log.d("ACOTOAIHFDHSFAKHGS",actor.toString());
