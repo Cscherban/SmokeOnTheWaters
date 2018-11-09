@@ -2,6 +2,9 @@ package com.example.sotw.donationtracker.model;
 
 import com.example.sotw.donationtracker.model.Actor;
 
+/**
+ * Normal User
+ */
 public class User extends Actor {
     private String name;
     private String email;
@@ -9,10 +12,20 @@ public class User extends Actor {
 
     private String userType = "User";
 
+    /**
+     * Required for firebase
+     */
     public User(){
         //Required for a firebase thing called Data Snapshot
     }
 
+    /**
+     *
+     * @param name of user
+     * @param id in db
+     * @param password of user
+     * @param userType - tells us what type they are without using reflections
+     */
     public User(String name, String id, String password, String userType) {
         this.name = name;
         this.email = id;

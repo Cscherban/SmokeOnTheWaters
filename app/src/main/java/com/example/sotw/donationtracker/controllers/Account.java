@@ -9,6 +9,9 @@ import android.widget.Button;
 import com.example.sotw.donationtracker.R;
 import com.google.firebase.auth.FirebaseAuth;
 
+/**
+ * Class that lets you view Account
+ */
 public class Account extends AppCompatActivity {
 
 

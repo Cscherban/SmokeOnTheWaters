@@ -6,6 +6,9 @@ import android.widget.TextView;
 
 import com.example.sotw.donationtracker.R;
 
+/**
+ * View for location
+ */
 public class LocationView extends AppCompatActivity {
     private TextView textView;
 

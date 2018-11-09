@@ -13,6 +13,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
+/**
+ * Activity for location employee home
+ */
 public class LocationEmployeeActivity extends AppCompatActivity {
 
     @Override

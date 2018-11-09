@@ -9,6 +9,9 @@ import android.widget.Button;
 import com.example.sotw.donationtracker.R;
 import com.google.firebase.auth.FirebaseAuth;
 
+/**
+ * Activity for normal users when they log in
+ */
 public class UserActivity extends AppCompatActivity {
 
     @Override

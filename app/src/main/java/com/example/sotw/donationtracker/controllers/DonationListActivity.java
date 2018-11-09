@@ -21,6 +21,9 @@ import com.example.sotw.donationtracker.model.OurModel;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class that lets you view things in list form for donations
+ */
 public class DonationListActivity extends AppCompatActivity {
 
     private List<DonationDropOff> donations;
@@ -114,6 +117,10 @@ public class DonationListActivity extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     * @return the static variable
+     */
     public static DonationDropOff getPublicDonation() {
         return publicDonation;
     }
@@ -206,6 +213,10 @@ public class DonationListActivity extends AppCompatActivity {
             public final TextView mContentView;
             public DonationDropOff mDonation;
 
+            /**
+             * constructor for inner class
+             * @param view that is the view used by the recycler
+             */
             public ViewHolder(View view) {
                 super(view);
                 mView = view;

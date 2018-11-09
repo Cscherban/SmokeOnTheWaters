@@ -7,6 +7,9 @@ import android.widget.TextView;
 import com.example.sotw.donationtracker.R;
 import com.example.sotw.donationtracker.model.Location;
 
+/**
+ * Activity to control what we see in activity
+ */
 public class LocationActivity extends AppCompatActivity {
 
     private TextView name;
@@ -35,6 +38,10 @@ public class LocationActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * populate the fields of a label
+     * @param location - location
+     */
     public void populateFields(Location location) {
         this.name.setText(location.getName());
         this.address.setText(location.getAddress());

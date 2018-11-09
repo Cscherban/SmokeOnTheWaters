@@ -31,7 +31,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
-
+/**
+ * class to control user registration
+ */
 public class registration extends AppCompatActivity {
     /**
      * UI elements

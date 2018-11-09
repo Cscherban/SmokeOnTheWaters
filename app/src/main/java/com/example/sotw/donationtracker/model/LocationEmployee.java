@@ -2,6 +2,9 @@ package com.example.sotw.donationtracker.model;
 
 import com.example.sotw.donationtracker.model.User;
 
+/**
+ * Location Employee Model Class
+ */
 public class LocationEmployee extends User {
     private String name;
     private String email;
@@ -10,6 +13,13 @@ public class LocationEmployee extends User {
     private Location location;
 
 
+    /**
+     *
+     * @param name of location employee
+     * @param id of employee in db
+     * @param password of person
+     * @param userType - so we don't need reflections
+     */
     public LocationEmployee(String name, String id, String password, String userType) {
         this.name = name;
         this.email = id;
@@ -17,6 +27,14 @@ public class LocationEmployee extends User {
         this.userType = userType;
     }
 
+    /**
+     *
+     * @param name of location employee
+     * @param id of employee in db
+     * @param password of person
+     * @param userType - so we don't need reflections
+     * @param location of employee
+     */
     public LocationEmployee(String name, String id,
                             String password, String userType,
                             Location location) {

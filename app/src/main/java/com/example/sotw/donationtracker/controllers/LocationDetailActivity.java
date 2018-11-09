@@ -26,6 +26,9 @@ import com.google.firebase.database.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Activity for viewing location details
+ */
 public class LocationDetailActivity extends AppCompatActivity {
 
     private final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -79,10 +82,17 @@ public class LocationDetailActivity extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     * @return the location for the detail
+     */
     public static Location getPublicLocation() {
         return publicLocation;
     }
 
+    /**
+     * Inner class to allow for use of RecyclerView
+     */
     public class MyAdapter
             extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
@@ -170,6 +180,11 @@ public class LocationDetailActivity extends AppCompatActivity {
             public final View mView;
             public final TextView mContentView;
             public Location mLocation;
+
+            /**
+             * constructor for ViewHolder
+             * @param view - view that will be used by recycler view
+             */
 
             public ViewHolder(View view) {
                 super(view);

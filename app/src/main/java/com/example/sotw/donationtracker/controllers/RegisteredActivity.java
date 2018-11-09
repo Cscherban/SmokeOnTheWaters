@@ -6,6 +6,9 @@ import android.widget.TextView;
 
 import com.example.sotw.donationtracker.R;
 
+/**
+ * Activity when you go through the registration
+ */
 public class RegisteredActivity extends AppCompatActivity {
 
     @Override

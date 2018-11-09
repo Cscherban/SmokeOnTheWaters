@@ -15,6 +15,9 @@ import com.example.sotw.donationtracker.model.OurModel;
 
 import java.util.List;
 
+/**
+ * Class that lets us search boi
+ */
 public class SearchActivity extends AppCompatActivity {
 
 

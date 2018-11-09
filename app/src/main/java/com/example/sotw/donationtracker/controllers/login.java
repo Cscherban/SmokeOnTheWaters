@@ -25,6 +25,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import android.support.annotation.NonNull;
 
+/**
+ * controller to filter input for when login is done
+ */
 public class login extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference ref; //Reference to the DB..to let us modify it

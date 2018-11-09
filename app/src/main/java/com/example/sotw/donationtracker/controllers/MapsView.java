@@ -32,7 +32,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Class for Map view
+ */
 public class MapsView extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;

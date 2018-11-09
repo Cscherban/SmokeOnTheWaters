@@ -12,16 +12,27 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class that holds locations for us in a list and donations
+ */
 public class OurModel {
     //holds some static objects for us
     private static final OurModel instance = new OurModel();
     private final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+
+    /**
+     * A singleton
+     * @return an instance of the outmodel
+     */
     public static OurModel getInstance() { return instance; }
     private boolean firstLoadDonations;
 
     private List<Location> locations;
     private List<DonationDropOff> donations;
 
+    /**
+     * Grabs all the locations from DB and puts them into list
+     */
     private void setLocationsFromDB(){
 
         DatabaseReference ref = reference.child("locations");
@@ -52,6 +63,9 @@ public class OurModel {
 
     }
 
+    /**
+     * Grabs all the donations from DB and puts them into list
+     */
     private void setDonationsFromDB(){
 
         DatabaseReference ref = reference.child("donations");
@@ -87,6 +101,9 @@ public class OurModel {
     }
 
 
+    /**
+     * Constructor for our model, initializes the lists
+     */
     public OurModel() {
         this.locations = new ArrayList<>();
         this.donations = new ArrayList<>();
@@ -95,18 +112,34 @@ public class OurModel {
         setLocationsFromDB();
     }
 
+    /**
+     *
+     * @return the locations list
+     */
     public List<Location> getLocations() {
         return locations;
     }
 
+    /**
+     *
+     * @param locations set the locations list
+     */
     public void setLocations(List<Location> locations) {
         this.locations = locations;
     }
 
+    /**
+     *
+     * @return get the donations as list
+     */
     public List<DonationDropOff> getDonations() {
         return donations;
     }
 
+    /**
+     *
+     * @param donations set the donations list
+     */
     public void setDonations(List<DonationDropOff> donations) {
         this.donations = donations;
     }

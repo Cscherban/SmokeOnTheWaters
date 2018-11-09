@@ -23,6 +23,9 @@ import com.example.sotw.donationtracker.model.OurModel;
 
 import java.util.List;
 
+/**
+ * Activity to Add Donation
+ */
 public class AddDonationActivity extends AppCompatActivity {
     private  static FirebaseAuth mAuth;     //Firebase Authorization object
     private  static final DatabaseReference ref =  FirebaseDatabase.getInstance().getReference();

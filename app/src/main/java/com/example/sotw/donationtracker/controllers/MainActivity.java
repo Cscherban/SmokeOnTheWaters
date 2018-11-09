@@ -8,6 +8,9 @@ import android.widget.Button;
 
 import com.example.sotw.donationtracker.R;
 
+/**
+ * Main activity that is seen upon login
+ */
 public class MainActivity extends AppCompatActivity {
 
 

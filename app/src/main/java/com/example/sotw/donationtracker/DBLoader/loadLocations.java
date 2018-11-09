@@ -2,6 +2,7 @@ package com.example.sotw.donationtracker.DBLoader;
 
 import android.content.Context;
 import android.os.Environment;
+import android.util.Log;
 
 import com.example.sotw.donationtracker.R;
 import com.example.sotw.donationtracker.model.Location;
@@ -55,7 +56,7 @@ class loadLocations {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }  catch(IOException e) {
-            System.out.println("io excpetion");
+            Log.d("asdf","io excpetion");
             e.printStackTrace();
         }
         finally {
