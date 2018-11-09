@@ -6,7 +6,7 @@ public class LocationEmployee extends User {
     private String name;
     private String email;
     private String password;
-    private String userType = "Location Empolyee";
+    private String userType = "Location Employee";
     private Location location;
 
 
