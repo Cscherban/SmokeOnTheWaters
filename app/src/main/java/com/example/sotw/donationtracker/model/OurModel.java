@@ -3,7 +3,6 @@ package com.example.sotw.donationtracker.model;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.example.sotw.donationtracker.controllers.LocationDetailActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

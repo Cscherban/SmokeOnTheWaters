@@ -21,7 +21,6 @@ import com.example.sotw.donationtracker.model.DonationDropOff;
 import com.example.sotw.donationtracker.model.Location;
 import com.example.sotw.donationtracker.model.OurModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AddDonationActivity extends AppCompatActivity {

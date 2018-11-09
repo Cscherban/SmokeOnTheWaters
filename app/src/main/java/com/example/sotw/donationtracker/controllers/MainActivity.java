@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.sotw.donationtracker.DBLoader.loadLocations;
 import com.example.sotw.donationtracker.R;
 
 public class MainActivity extends AppCompatActivity {

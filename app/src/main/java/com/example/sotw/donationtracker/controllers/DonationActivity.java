@@ -7,7 +7,6 @@ import android.widget.TextView;
 import com.example.sotw.donationtracker.R;
 import com.example.sotw.donationtracker.model.DonationDropOff;
 
-import org.w3c.dom.Text;
 
 public class DonationActivity extends AppCompatActivity {
 

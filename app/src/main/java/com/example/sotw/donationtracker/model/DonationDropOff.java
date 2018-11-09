@@ -2,7 +2,6 @@ package com.example.sotw.donationtracker.model;
 
 import android.media.Image;
 
-import java.time.LocalDateTime;
 
 public class DonationDropOff {
     private String timestamp;
