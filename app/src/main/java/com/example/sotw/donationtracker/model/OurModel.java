@@ -34,7 +34,7 @@ public class OurModel {
 
                 Log.d("Firebase","EnteredCallback:success");
 
-                //get All datasnapshotobjects from the "locations" document(aka table)
+                //get All data snapshot objects from the "locations" document(aka table)
                 for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
                     Location boi = postSnapshot.getValue(Location.class);
                     locations.add(boi);
@@ -67,7 +67,7 @@ public class OurModel {
 
                 Log.d("Firebase","EnteredCallback:success");
 
-                //get All datasnapshotobjects from the "locations" document(aka table)
+                //get All data snapshot objects from the "locations" document(aka table)
                 for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
                     DonationDropOff boi = postSnapshot.getValue(DonationDropOff.class);
                     donations.add(boi);

@@ -47,7 +47,7 @@ public class registration extends AppCompatActivity {
      * Useful objects
      */
     public Actor user;              //User Object
-    private FirebaseAuth mAuth;     //Firebase Autherization object
+    private FirebaseAuth mAuth;     //Firebase Authorization object
     private DatabaseReference ref; //Reference to the DB..to let us modify it
     private OurModel ourModel;
 

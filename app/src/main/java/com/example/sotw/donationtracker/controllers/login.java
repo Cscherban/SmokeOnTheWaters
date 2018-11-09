@@ -54,7 +54,7 @@ public class login extends AppCompatActivity {
 
                 Log.d("Firebase","EnteredCallback:success");
 
-                //get All datasnapshotobjects from the "locations" document(aka table)
+                //get All datasnapshot objects from the "locations" document(aka table)
 
                 Actor actor = dataSnapshot.getValue(Actor.class);
                 Log.d("Firebase",actor.getClass().toString());
