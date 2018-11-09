@@ -1,6 +1,7 @@
 package com.example.sotw.donationtracker.DBLoader;
 
 import android.content.Context;
+import android.os.Environment;
 
 import com.example.sotw.donationtracker.R;
 import com.example.sotw.donationtracker.model.Location;
@@ -87,7 +88,7 @@ public class loadLocations {
 
 
         //Absolute path, ugly yes. but idk any other way for now
-        String location = "/sdcard" + "/Download/locationdata.csv";
+        String location = Environment.getExternalStorageDirectory().getPath() + "/Download/locationdata.csv";
         List<Location> locations = parseCSV(context, location);
         putIntoFirebase(locations);
 
