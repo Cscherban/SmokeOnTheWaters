@@ -7,12 +7,13 @@ import android.widget.TextView;
 import com.example.sotw.donationtracker.R;
 
 public class RegisteredActivity extends AppCompatActivity {
-    private TextView userType;
-    private TextView name;
-    private TextView email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        TextView userType;
+        TextView name;
+        TextView email;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registered);
 
@@ -21,7 +22,7 @@ public class RegisteredActivity extends AppCompatActivity {
        String emailstr = getIntent().getStringExtra("e-mail");
 
         name = findViewById(R.id.name);
-       name.setText("Name: " + namestr);
+        name.setText("Name: " + namestr);
 
        userType = findViewById(R.id.userType);
        userType.setText("User Type: " + userTypestr);

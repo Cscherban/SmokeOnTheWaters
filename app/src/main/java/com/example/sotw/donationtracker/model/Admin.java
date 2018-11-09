@@ -17,6 +17,7 @@ public class Admin extends Actor {
         this.name = name;
         this.email = id;
         this.password = password;
+        this.userType = userType;
     }
 
     public String getEmail() {

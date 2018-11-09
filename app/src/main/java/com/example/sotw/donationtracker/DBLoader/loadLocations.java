@@ -32,9 +32,9 @@ public class loadLocations {
             InputStream is = context.getResources().openRawResource(R.raw.locationdata);
 
             br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
-            line = br.readLine(); //read/ignore first line
-            while ((line = br.readLine()) != null) {
-
+            br.readLine();
+            line = br.readLine(); //read/ignore first linebr.readLine();
+            while (line != null) {
                 // use comma as separator
                 String[] data = line.split(cvsSplitBy);
                 String key = data[0];
@@ -49,7 +49,7 @@ public class loadLocations {
 
                 locations.add(new Location(key,name,address,latitude,longitude,type,phone,website));
 
-
+                line = br.readLine();
             }
 
         } catch (FileNotFoundException e) {

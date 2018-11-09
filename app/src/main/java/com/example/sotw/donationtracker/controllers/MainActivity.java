@@ -10,13 +10,15 @@ import com.example.sotw.donationtracker.DBLoader.loadLocations;
 import com.example.sotw.donationtracker.R;
 
 public class MainActivity extends AppCompatActivity {
-    private Button loginButton;
-    private Button registerButton;
-    private Button locationButton;
-    private Button maps;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Button loginButton;
+        Button registerButton;
+        Button locationButton;
+        Button maps;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

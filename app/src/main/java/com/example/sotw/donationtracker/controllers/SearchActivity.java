@@ -17,15 +17,16 @@ import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
 
-    private Button search;
+
     private Spinner searchType;
     private Spinner category;
     private Spinner loc;
     private EditText itemName;
-    private OurModel ourModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Button search;
+        OurModel ourModel;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
