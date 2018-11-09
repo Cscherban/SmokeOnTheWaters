@@ -22,9 +22,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        loginButton = (Button) findViewById(R.id.button);
-        registerButton = (Button) findViewById(R.id.button3);
-        locationButton = (Button) findViewById(R.id.LocationButton);
+        loginButton = findViewById(R.id.button);
+        registerButton = findViewById(R.id.button3);
+        locationButton = findViewById(R.id.LocationButton);
         maps = findViewById(R.id.MapView);
 
         maps.setOnClickListener(new View.OnClickListener() {

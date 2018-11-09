@@ -46,10 +46,10 @@ public class AddDonationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_donation);
 
-        Button addDonation = (Button) findViewById(R.id.add);
+        Button addDonation = findViewById(R.id.add);
         final String locationName = getIntent().getStringExtra("locale");
 
-        categories = (Spinner) findViewById(R.id.categories);
+        categories = findViewById(R.id.categories);
 
         String[] categs = new String[]{Category.Clothing.getItem(), Category.Electronics.getItem()
         , Category.Hat.getItem(), Category.Household.getItem(), Category.Kitchen.getItem(),
@@ -62,12 +62,12 @@ public class AddDonationActivity extends AppCompatActivity {
         addDonation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText shortDesc = (EditText) findViewById(R.id.editShort);
-                EditText longDesc = (EditText) findViewById(R.id.editLong);
-                EditText comments = (EditText) findViewById(R.id.editComments);
-                EditText date = (EditText) findViewById(R.id.editDate);
-                EditText time = (EditText) findViewById(R.id.editTime);
-                EditText value = (EditText) findViewById(R.id.editValue);
+                EditText shortDesc = findViewById(R.id.editShort);
+                EditText longDesc = findViewById(R.id.editLong);
+                EditText comments = findViewById(R.id.editComments);
+                EditText date = findViewById(R.id.editDate);
+                EditText time = findViewById(R.id.editTime);
+                EditText value = findViewById(R.id.editValue);
 
                 Location location = new Location(locationName);
                 String dateString = date.getText().toString();

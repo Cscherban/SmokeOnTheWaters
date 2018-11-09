@@ -139,9 +139,11 @@ public class MapsView extends FragmentActivity implements OnMapReadyCallback {
                             Iterable<DataSnapshot> data = dataSnapshot.getChildren();
                             for (DataSnapshot d : data) {
                                 com.example.sotw.donationtracker.model.Location location = d.getValue(com.example.sotw.donationtracker.model.Location.class);
-                                Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).title(location.getName()));
-                                marker.setTag(location.getKey());
-                                locationList.add(location);
+                                if(location != null) {
+                                    Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).title(location.getName()));
+                                    marker.setTag(location.getKey());
+                                    locationList.add(location);
+                                }
                             }
                         }
 
@@ -154,7 +156,11 @@ public class MapsView extends FragmentActivity implements OnMapReadyCallback {
                     mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                         @Override
                         public boolean onMarkerClick(Marker marker) {
-                            String name = marker.getTag().toString();
+                            String name = "";
+
+                            if(marker.getTag() != null){
+                                name = marker.getTag().toString();
+                            }
                             for (com.example.sotw.donationtracker.model.Location location : locationList) {
                                 if (location.getKey().equals(name)) {
                                     Intent locationObject = new Intent(getApplicationContext(), LocationView.class);

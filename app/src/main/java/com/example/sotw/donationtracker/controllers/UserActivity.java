@@ -16,8 +16,8 @@ public class UserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
-        Button logout = (Button) findViewById(R.id.user_logout);
-        Button search = (Button) findViewById(R.id.searchButton);
+        Button logout = findViewById(R.id.user_logout);
+        Button search = findViewById(R.id.searchButton);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override

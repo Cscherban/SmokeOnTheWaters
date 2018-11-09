@@ -41,7 +41,7 @@ public class LocationDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_detail);
-        locationList = (RecyclerView) findViewById(R.id.view);
+        locationList = findViewById(R.id.view);
         locationList.setHasFixedSize(true);
 
         listLayout = new LinearLayoutManager(this);
@@ -173,7 +173,7 @@ public class LocationDetailActivity extends AppCompatActivity {
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
-                mContentView = (TextView) view.findViewById(R.id.locationName);
+                mContentView = view.findViewById(R.id.locationName);
             }
 
             @Override

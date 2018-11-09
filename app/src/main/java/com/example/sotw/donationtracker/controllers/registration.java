@@ -233,7 +233,7 @@ public class registration extends AppCompatActivity {
                             FirebaseUser fireBaseUser = mAuth.getCurrentUser();
 
                             //Create the User in the DB
-                            if(createUserInDB(user,fireBaseUser)){
+                            if(fireBaseUser != null && createUserInDB(user,fireBaseUser)){
 
                                 Intent registeredIntent = new Intent(getApplicationContext(), RegisteredActivity.class);
                                 registeredIntent.putExtra("userType", user.getUserType());
@@ -252,7 +252,10 @@ public class registration extends AppCompatActivity {
                             // If sign in fails, display a message to the user.
                             Log.w("Failure", "createUserWithEmail:failure", task.getException());
                             TextView failed = findViewById(R.id.failed);
-                            failed.setText(task.getException().toString());
+                            Exception e =task.getException();
+                            if(e != null){
+                                failed.setText(e.toString());
+                            }
                         }
 
                     }

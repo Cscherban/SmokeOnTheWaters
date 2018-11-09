@@ -21,9 +21,9 @@ public class LocationEmployeeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_location_employee);
         final String locationName = getIntent().getStringExtra("locale");
 
-        Button logout = (Button) findViewById(R.id.logoutLocation);
-        Button showDon = (Button) findViewById(R.id.seeDonations);
-        Button addDon = (Button) findViewById(R.id.addDonation);
+        Button logout = findViewById(R.id.logoutLocation);
+        Button showDon = findViewById(R.id.seeDonations);
+        Button addDon = findViewById(R.id.addDonation);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override

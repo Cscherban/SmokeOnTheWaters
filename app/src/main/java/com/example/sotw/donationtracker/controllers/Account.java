@@ -17,7 +17,7 @@ public class Account extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
-        Button logout = (Button) findViewById(R.id.logout);
+        Button logout = findViewById(R.id.logout);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override

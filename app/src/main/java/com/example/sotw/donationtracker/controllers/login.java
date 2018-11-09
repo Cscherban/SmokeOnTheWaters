@@ -91,7 +91,7 @@ public class login extends AppCompatActivity {
      */
     private void failure(){
 
-        TextView status = (TextView) findViewById(R.id.status);
+        TextView status = findViewById(R.id.status);
         status.setText("Incorrect username or password");
 
     }
@@ -105,8 +105,9 @@ public class login extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("Success Message", "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-
-                            success(user);
+                            if(user != null){
+                                success(user);
+                            }
                         }else {
                             failure();
                         }
@@ -124,13 +125,13 @@ public class login extends AppCompatActivity {
         ref = FirebaseDatabase.getInstance().getReference();
 
 
-        Button loginButton = (Button) findViewById(R.id.login);
+        Button loginButton = findViewById(R.id.login);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText username = (EditText) findViewById(R.id.username);
-                EditText password = (EditText) findViewById(R.id.password);
+                EditText username = findViewById(R.id.username);
+                EditText password = findViewById(R.id.password);
 
                 Intent nextScreen = new Intent(getApplicationContext(), Account.class);
                 String email = username.getText().toString();

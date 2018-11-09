@@ -30,11 +30,11 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        search = (Button) findViewById(R.id.SearchButton);
-        searchType = (Spinner) findViewById(R.id.TypeSpinner);
-        category = (Spinner) findViewById(R.id.CategorySpinner);
-        loc = (Spinner) findViewById(R.id.LocationSpinner);
-        itemName = (EditText) findViewById(R.id.editText);
+        search = findViewById(R.id.SearchButton);
+        searchType = findViewById(R.id.TypeSpinner);
+        category = findViewById(R.id.CategorySpinner);
+        loc = findViewById(R.id.LocationSpinner);
+        itemName = findViewById(R.id.editText);
         ourModel = new OurModel();
 
         String[] sTypes = new String[]{"Pick a search type", "Item Name", "Category"};

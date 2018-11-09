@@ -21,12 +21,12 @@ public class LocationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
 
-        this.name = (TextView) findViewById(R.id.name);
-        this.address = (TextView) findViewById(R.id.address);
-        this.latitude = (TextView) findViewById(R.id.latitude);
-        this.longitude = (TextView) findViewById(R.id.longitude);
-        this.type = (TextView) findViewById(R.id.type);
-        this.phone = (TextView) findViewById(R.id.phone);
+        this.name = findViewById(R.id.name);
+        this.address = findViewById(R.id.address);
+        this.latitude = findViewById(R.id.latitude);
+        this.longitude = findViewById(R.id.longitude);
+        this.type = findViewById(R.id.type);
+        this.phone = findViewById(R.id.phone);
 
         //Location location = new Location("0","ATL Food Bank", "120 North Ave NW",
         //        869.111f, 404.345f, "Drop Off", "(404) 584 9989","site.com");
