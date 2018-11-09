@@ -25,7 +25,7 @@ import java.util.List;
 
 public class AddDonationActivity extends AppCompatActivity {
     private  static FirebaseAuth mAuth;     //Firebase Authorization object
-    private  static DatabaseReference ref =  FirebaseDatabase.getInstance().getReference();
+    private  static final DatabaseReference ref =  FirebaseDatabase.getInstance().getReference();
 
     private Spinner categories;
 
@@ -35,7 +35,8 @@ public class AddDonationActivity extends AppCompatActivity {
         //get the key for location in the db
         String donationTimestamp = donation.getTimestamp();
 
-        //get a reference to where we want to write( which is making the donation a child of each location
+        //get a reference to where we want to write
+        // ( which is making the donation a child of each location)
         DatabaseReference donationsRef = ref.child("donations");
         donationsRef.child(donationTimestamp).setValue(donation);
     }
@@ -78,9 +79,9 @@ public class AddDonationActivity extends AppCompatActivity {
                 String categName = categories.getSelectedItem().toString();
                 Category[] categoryTypes = Category.values();
                 Category donationCategory = null;
-                for (int i = 0; i < categoryTypes.length; i++) {
-                    if (categName.equals(categoryTypes[i].getItem())) {
-                        donationCategory = categoryTypes[i];
+                for (Category cat : categoryTypes) {
+                    if (categName.equals(cat.getItem())) {
+                        donationCategory = cat;
                     }
                 }
 
@@ -88,7 +89,9 @@ public class AddDonationActivity extends AppCompatActivity {
                 double val = Double.parseDouble(valueString);
 
 
-                DonationDropOff donation = new DonationDropOff(dateTime, location, shortDescription, longDescription, val, donationCategory);
+                DonationDropOff donation =
+                        new DonationDropOff(dateTime, location, shortDescription,
+                                            longDescription, val, donationCategory);
                 addDonationToDB(donation);
 
                 OurModel model = OurModel.getInstance();

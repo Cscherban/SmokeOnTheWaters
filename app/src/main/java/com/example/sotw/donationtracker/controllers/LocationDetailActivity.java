@@ -27,9 +27,9 @@ import java.util.List;
 
 public class LocationDetailActivity extends AppCompatActivity {
 
-    private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference ref = database.getReference().child("locations");
-    private List<Location> locationsArrayList = new ArrayList<>();
+    private final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private final DatabaseReference ref = database.getReference().child("locations");
+    private final List<Location> locationsArrayList = new ArrayList<>();
     private RecyclerView locationList;
     private RecyclerView.Adapter listAdapter;
     private RecyclerView.LayoutManager listLayout;
@@ -116,7 +116,8 @@ public class LocationDetailActivity extends AppCompatActivity {
 
             //final Model model = Model.getInstance();
             /*
-            This is where we have to bind each data element in the list (given by position parameter)
+            This is where we have to bind each data element in
+             the list (given by position parameter)
             to an element in the view (which is one of our two TextView widgets
              */
             //start by getting the element at the correct position
@@ -142,7 +143,8 @@ public class LocationDetailActivity extends AppCompatActivity {
                             pass along the id of the course so we can retrieve the correct data in
                             the next window
                          */
-                        //intent.putExtra(CourseDetailFragment.ARG_COURSE_ID, holder.mLocation.getKey());
+                        //intent.putExtra(CourseDetailFragment.ARG_COURSE_ID,
+                        //  holder.mLocation.getKey());
                         //intent.putExtra("key",holder.mLocation.getKey());
                         publicLocation = holder.mLocation;
                         //now just display the new window

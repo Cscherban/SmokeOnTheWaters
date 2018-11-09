@@ -18,7 +18,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class loadLocations {
+class loadLocations {
     private  static FirebaseAuth mAuth;     //Firebase Authorization object
     private  static DatabaseReference ref;
 
@@ -88,7 +88,8 @@ public class loadLocations {
 
 
         //Absolute path, ugly yes. but idk any other way for now
-        String location = Environment.getExternalStorageDirectory().getPath() + "/Download/locationdata.csv";
+        String location = Environment.getExternalStorageDirectory().getPath()
+                                                + "/Download/locationdata.csv";
         List<Location> locations = parseCSV(context, location);
         putIntoFirebase(locations);
 

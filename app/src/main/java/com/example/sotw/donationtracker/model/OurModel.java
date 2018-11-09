@@ -15,7 +15,7 @@ import java.util.List;
 public class OurModel {
     //holds some static objects for us
     private static final OurModel instance = new OurModel();
-    private DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+    private final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
     public static OurModel getInstance() { return instance; }
     private boolean firstLoadDonations;
 
@@ -88,8 +88,8 @@ public class OurModel {
 
 
     public OurModel() {
-        this.locations = new ArrayList<Location>();
-        this.donations = new ArrayList<DonationDropOff>();
+        this.locations = new ArrayList<>();
+        this.donations = new ArrayList<>();
         firstLoadDonations = true;
         setDonationsFromDB();
         setLocationsFromDB();

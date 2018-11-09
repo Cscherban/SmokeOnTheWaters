@@ -20,7 +20,8 @@ public class Location {
         this(null, name, null, 0.0f, 0.0f, null, null, null);
     }
 
-    public Location(String key,String name, String address, float latitude, float longitude, String type, String phone,String website) {
+    public Location(String key,String name, String address, float latitude,
+                    float longitude, String type, String phone,String website) {
         this.name = name;
         this.address = address;
         this.latitude = latitude;

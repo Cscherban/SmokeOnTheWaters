@@ -62,7 +62,10 @@ public class SearchActivity extends AppCompatActivity {
                 Location location = (Location) loc.getSelectedItem();
                 if (searchType.getSelectedItem().toString().equals("Category")) {
                     String cat = category.getSelectedItem().toString();
-                    Intent categorySearch = new Intent(getApplicationContext(), DonationListActivity.class);
+
+                    Intent categorySearch
+                            = new Intent(getApplicationContext(), DonationListActivity.class);
+
                     categorySearch.putExtra("locale", "searchForDonation");
                     categorySearch.putExtra("location", location.getName());
                     categorySearch.putExtra("type", "category");
@@ -70,7 +73,10 @@ public class SearchActivity extends AppCompatActivity {
                     startActivity(categorySearch);
                 } else if (searchType.getSelectedItem().toString().equals("Item Name")) {
                     String item = itemName.getText().toString();
-                    Intent nameSearch = new Intent(getApplicationContext(), DonationListActivity.class);
+
+                    Intent nameSearch
+                            = new Intent(getApplicationContext(), DonationListActivity.class);
+
                     nameSearch.putExtra("locale", "searchForDonation");
                     nameSearch.putExtra("location", location.getName());
                     nameSearch.putExtra("type", "name");

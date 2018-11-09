@@ -100,12 +100,26 @@ public class MapsView extends FragmentActivity implements OnMapReadyCallback {
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.INTERNET},
+            if (ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                                Manifest.permission.ACCESS_FINE_LOCATION,
+                                Manifest.permission.INTERNET},
                         10);
             } else {
-                locationManager.requestLocationUpdates(android.location.LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-                Location location = locationManager.getLastKnownLocation(android.location.LocationManager.NETWORK_PROVIDER);
+                locationManager.requestLocationUpdates(
+                        android.location.LocationManager.NETWORK_PROVIDER, 0,
+                        0, locationListener);
+
+                Location location =
+                        locationManager.getLastKnownLocation(
+                                android.location.LocationManager.NETWORK_PROVIDER);
+
                 locationManager.removeUpdates(locationListener);
                 if (location == null) {
                     Log.e("Maps", "Houston, we have a problem.");
@@ -115,7 +129,9 @@ public class MapsView extends FragmentActivity implements OnMapReadyCallback {
 
                     // Add a marker in Sydney and move the camera
                     LatLng sydney = new LatLng(latitude, longitude);
-                    Marker main = mMap.addMarker(new MarkerOptions().position(sydney).title("You are here"));
+                    Marker main = mMap.addMarker(
+                                    new MarkerOptions().position(sydney).title("You are here"));
+
                     main.setTag("mainMarker");
 
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10));
@@ -124,14 +140,20 @@ public class MapsView extends FragmentActivity implements OnMapReadyCallback {
                     reference = database.getReference();
                     locationList = new ArrayList<>();
 
-                    reference.child("locations").addListenerForSingleValueEvent(new ValueEventListener() {
+                    reference.child("locations").addListenerForSingleValueEvent(
+                                                                        new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             Iterable<DataSnapshot> data = dataSnapshot.getChildren();
                             for (DataSnapshot d : data) {
-                                com.example.sotw.donationtracker.model.Location location = d.getValue(com.example.sotw.donationtracker.model.Location.class);
+                                com.example.sotw.donationtracker.model.Location location =
+                                        d.getValue(com.example.sotw.donationtracker.model.Location.class);
+
                                 if(location != null) {
-                                    Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).title(location.getName()));
+                                    Marker marker = mMap.addMarker(new MarkerOptions().position(
+                                            new LatLng(location.getLatitude(),
+                                                    location.getLongitude())).title(location.getName()));
+
                                     marker.setTag(location.getKey());
                                     locationList.add(location);
                                 }
@@ -152,9 +174,11 @@ public class MapsView extends FragmentActivity implements OnMapReadyCallback {
                             if(marker.getTag() != null){
                                 name = marker.getTag().toString();
                             }
-                            for (com.example.sotw.donationtracker.model.Location location : locationList) {
+                            for (com.example.sotw.donationtracker.model.Location location
+                                                                                 : locationList) {
                                 if (location.getKey().equals(name)) {
-                                    Intent locationObject = new Intent(getApplicationContext(), LocationView.class);
+                                    Intent locationObject = new Intent(getApplicationContext(),
+                                            LocationView.class);
                                     locationObject.putExtra("address", location.getAddress());
                                     locationObject.putExtra("name", location.getName());
                                     locationObject.putExtra("phone", location.getPhone());

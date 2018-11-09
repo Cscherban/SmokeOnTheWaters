@@ -4,7 +4,7 @@ public enum Category {
     Clothing("Clothing"), Hat("Hat"), Kitchen("Kitchen"), Electronics("Electronics"),
     Household("Household"), Other("Other");
 
-    private String item;
+    private final String item;
 
     Category(String item) {
         this.item = item;

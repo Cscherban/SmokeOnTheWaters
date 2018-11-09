@@ -45,7 +45,7 @@ public class registration extends AppCompatActivity {
     /**
      * Useful objects
      */
-    public Actor user;              //User Object
+    private Actor user;              //User Object
     private FirebaseAuth mAuth;     //Firebase Authorization object
     private DatabaseReference ref; //Reference to the DB..to let us modify it
     private OurModel ourModel;
@@ -75,7 +75,10 @@ public class registration extends AppCompatActivity {
         locationEmp.setVisibility(View.GONE);
 
 
-        String[] spinnerValues = new String[]{"Pick a type of user", "User", "Location Employee", "Branch Manager", "Admin"};
+        String[] spinnerValues = new String[]{"Pick a type of user", "User",
+                                                "Location Employee", "Branch Manager",
+                                                "Admin"};
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, spinnerValues);
         spinner.setAdapter(adapter);
@@ -88,7 +91,8 @@ public class registration extends AppCompatActivity {
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+            public void onItemSelected(AdapterView<?> parentView,
+                                        View selectedItemView, int position, long id) {
                 if (spinner.getSelectedItem().toString().equals("Location Employee")) {
                     locationEmp.setVisibility(View.VISIBLE);
                 } else {
@@ -142,20 +146,25 @@ public class registration extends AppCompatActivity {
 
                     if (spinner.getSelectedItem().equals("User")) {
                         user = new User(name.getText().toString(), email.getText().toString(),
-                                password.getText().toString(), spinner.getSelectedItem().toString());
+                                password.getText().toString(),
+                                                        spinner.getSelectedItem().toString());
 
                         Log.d("Success", "CreatedUser:success");
 
                     } else if (spinner.getSelectedItem().equals("Location Employee")) {
 
-                            user = new LocationEmployee(name.getText().toString(), email.getText().toString(),
-                                    password.getText().toString(), spinner.getSelectedItem().toString(),
+                            user = new LocationEmployee(name.getText().toString(),
+                                    email.getText().toString(), password.getText().toString(),
+                                    spinner.getSelectedItem().toString(),
                                     (Location) locationEmp.getSelectedItem());
+
                             Log.d("Success", "CreatedLocationEmployee:success");
 
                     } else if (spinner.getSelectedItem().equals("Branch Manager")) {
-                        user = new BranchManager(name.getText().toString(), email.getText().toString(),
-                                password.getText().toString(), spinner.getSelectedItem().toString());
+                        user = new BranchManager(name.getText().toString(),
+                                                email.getText().toString(),
+                                                password.getText().toString(),
+                                                spinner.getSelectedItem().toString());
 
                         Log.d("Success", "CreatedBranchManager:success");
 
@@ -198,7 +207,7 @@ public class registration extends AppCompatActivity {
 
 
 
-    private boolean createUserInDB(Actor user,FirebaseUser firebaseUser){
+    private void createUserInDB(Actor user,FirebaseUser firebaseUser){
         DatabaseReference usersRef = ref.child("users");
         Log.d("DB", "DBInteraction:started");
 
@@ -215,7 +224,6 @@ public class registration extends AppCompatActivity {
         //Since I only care about putting a single user in the DB
         usersRef.child(firebaseUser.getUid()).setValue(user);
 
-        return true;
     }
 
     private void firstAuthentication(final Actor user){
@@ -232,9 +240,10 @@ public class registration extends AppCompatActivity {
                             FirebaseUser fireBaseUser = mAuth.getCurrentUser();
 
                             //Create the User in the DB
-                            if(fireBaseUser != null && createUserInDB(user,fireBaseUser)){
-
-                                Intent registeredIntent = new Intent(getApplicationContext(), RegisteredActivity.class);
+                            if(fireBaseUser != null){
+                                createUserInDB(user,fireBaseUser);
+                                Intent registeredIntent
+                                        = new Intent(getApplicationContext(), RegisteredActivity.class);
                                 registeredIntent.putExtra("userType", user.getUserType());
                                 registeredIntent.putExtra("name", user.getName());
                                 registeredIntent.putExtra("e-mail", user.getEmail());
@@ -273,7 +282,6 @@ public class registration extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        //TODO do something
     }
 }
 

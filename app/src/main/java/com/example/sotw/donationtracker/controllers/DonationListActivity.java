@@ -53,7 +53,9 @@ public class DonationListActivity extends AppCompatActivity {
                         }
                     }
                     if (filteredDonations.size() == 0) {
-                        filteredDonations.add(new DonationDropOff(null, null, "Nothing Found", null, 0, null));
+                        filteredDonations.add(new DonationDropOff(null,
+                                null, "Nothing Found",
+                                null, 0, null));
                     }
                 } else if (typeOfSearch.equals("name")) {
                     String nameSearch = getIntent().getStringExtra("nameSearch");
@@ -63,7 +65,9 @@ public class DonationListActivity extends AppCompatActivity {
                         }
                     }
                     if (filteredDonations.size() == 0) {
-                        filteredDonations.add(new DonationDropOff(null, null, "Nothing Found", null, 0, null));
+                        filteredDonations.add(new DonationDropOff(null,
+                                                                null, "Nothing Found",
+                                                                null, 0, null));
                     }
                 }
             } else {
@@ -71,23 +75,29 @@ public class DonationListActivity extends AppCompatActivity {
                     String categoryName = getIntent().getStringExtra("categoryName");
                     for (int i = 0; i < donations.size(); i++) {
                         if (donations.get(i).getCategory().getItem().equals(categoryName)
-                                && donations.get(i).getLocation().getName().equals(newLocationName)) {
+                                && donations.get(i).getLocation().getName().equals(newLocationName))
+                        {
                             filteredDonations.add(donations.get(i));
                         }
                     }
                     if (filteredDonations.size() == 0) {
-                        filteredDonations.add(new DonationDropOff("", new Location(""), "Nothing Found", "", 0, Category.Other));
+                        filteredDonations.add(new DonationDropOff("",
+                                                new Location(""), "Nothing Found",
+                                                "", 0, Category.Other));
                     }
                 } else {
                     String nameSearch = getIntent().getStringExtra("nameSearch");
                     for (int i = 0; i < donations.size(); i++) {
                         if (donations.get(i).getShortDescription().equals(nameSearch)
-                                && donations.get(i).getLocation().getName().equals(newLocationName)) {
+                                && donations.get(i).getLocation().getName().equals(newLocationName))
+                        {
                             filteredDonations.add(donations.get(i));
                         }
                     }
                     if (filteredDonations.size() == 0) {
-                        filteredDonations.add(new DonationDropOff("", new Location(""), "Nothing Found", "", 0, Category.Other));
+                        filteredDonations.add(new DonationDropOff("", new Location(""),
+                                            "Nothing Found", "",
+                                            0, Category.Other));
                     }
                 }
             }
@@ -141,7 +151,8 @@ public class DonationListActivity extends AppCompatActivity {
 
             //final Model model = Model.getInstance();
             /*
-            This is where we have to bind each data element in the list (given by position parameter)
+            This is where we have to bind each data element in the list
+            (given by position parameter)
             to an element in the view (which is one of our two TextView widgets
              */
             //start by getting the element at the correct position
@@ -167,7 +178,8 @@ public class DonationListActivity extends AppCompatActivity {
                             pass along the id of the course so we can retrieve the correct data in
                             the next window
                          */
-                    //intent.putExtra(CourseDetailFragment.ARG_COURSE_ID, holder.mLocation.getKey());
+                    //intent.putExtra(CourseDetailFragment.ARG_COURSE_ID,
+                    // holder.mLocation.getKey());
                     //intent.putExtra("key",holder.mLocation.getKey());
                     publicDonation = holder.mDonation;
                     //now just display the new window

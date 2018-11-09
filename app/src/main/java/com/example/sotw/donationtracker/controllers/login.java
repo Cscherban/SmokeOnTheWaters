@@ -58,7 +58,8 @@ public class login extends AppCompatActivity {
                 Log.d("ACOTOAIHFDHSFAKHGS",actor.toString());
 
                 if((actor).getUserType().equals("Location Employee")){
-                    Intent LocationEmployeeScreen = new Intent(getApplicationContext(), LocationEmployeeActivity.class);
+                    Intent LocationEmployeeScreen =
+                            new Intent(getApplicationContext(), LocationEmployeeActivity.class);
                     LocationEmployeeScreen.putExtra("locale", actor.getLocation().getName());
                     startActivity(LocationEmployeeScreen);
                 }else{
@@ -141,6 +142,5 @@ public class login extends AppCompatActivity {
         });
     }
 
-    //TODO write an onStart to check if the user already logged in
 
 }
