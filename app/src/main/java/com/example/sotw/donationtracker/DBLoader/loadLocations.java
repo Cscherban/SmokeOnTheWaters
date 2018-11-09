@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class loadLocations {
-    private  static FirebaseAuth mAuth;     //Firebase Autherization object
+    private  static FirebaseAuth mAuth;     //Firebase Authorization object
     private  static DatabaseReference ref;
 
     private  static List<Location> parseCSV(Context context, String filename){

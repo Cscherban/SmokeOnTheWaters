@@ -48,7 +48,7 @@ public class MapsView extends FragmentActivity implements OnMapReadyCallback {
     private DatabaseReference reference;
     private ArrayList<com.example.sotw.donationtracker.model.Location> locationList;
 
-    private double lattitude;
+    private double latitude;
     private double longitude;
     private LocationManager locationManager;
     private LocationListener locationListener;
@@ -84,7 +84,7 @@ public class MapsView extends FragmentActivity implements OnMapReadyCallback {
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                lattitude = location.getLatitude();
+                latitude = location.getLatitude();
                 longitude = location.getLongitude();
 
             }
@@ -119,11 +119,11 @@ public class MapsView extends FragmentActivity implements OnMapReadyCallback {
                 if (location == null) {
                     Log.e("Maps", "Houston, we have a problem.");
                 } else {
-                    lattitude = location.getLatitude();
+                    latitude = location.getLatitude();
                     longitude = location.getLongitude();
 
                     // Add a marker in Sydney and move the camera
-                    LatLng sydney = new LatLng(lattitude, longitude);
+                    LatLng sydney = new LatLng(latitude, longitude);
                     Marker main = mMap.addMarker(new MarkerOptions().position(sydney).title("You are here"));
                     main.setTag("mainMarker");
 

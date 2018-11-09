@@ -149,7 +149,7 @@ public class DonationListActivity extends AppCompatActivity {
             holder.mDonation = mDonations.get(position);
             /*
               Now we bind the data to the widgets.  In this case, pretty simple, put the id in one
-              textview and the string rep of a course in the other.
+              text view and the string rep of a course in the other.
              */
             holder.mContentView.setText(mDonations.get(position).getShortDescription());
 

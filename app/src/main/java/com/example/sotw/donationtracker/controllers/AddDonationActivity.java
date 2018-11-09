@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddDonationActivity extends AppCompatActivity {
-    private  static FirebaseAuth mAuth;     //Firebase Autherization object
+    private  static FirebaseAuth mAuth;     //Firebase Authorization object
     private  static DatabaseReference ref =  FirebaseDatabase.getInstance().getReference();
 
     private Spinner categories;
@@ -33,7 +33,7 @@ public class AddDonationActivity extends AppCompatActivity {
     private void addDonationToDB(DonationDropOff donation){
 
 
-        //get the key for locaiton in the db
+        //get the key for location in the db
         String donationTimestamp = donation.getTimestamp();
 
         //get a reference to where we want to write( which is making the donation a child of each location
@@ -95,7 +95,7 @@ public class AddDonationActivity extends AppCompatActivity {
                 OurModel model = OurModel.getInstance();
                 List<DonationDropOff> donationList = model.getDonations();
                 donationList.add(donation);
-                Log.d("Addingstuff", donationList.get(0).getLocation().getName());
+                Log.d("Adding Stuff", donationList.get(0).getLocation().getName());
                 model.setDonations(donationList);
 
                 Intent goBack = new Intent(getApplicationContext(), LocationEmployeeActivity.class);

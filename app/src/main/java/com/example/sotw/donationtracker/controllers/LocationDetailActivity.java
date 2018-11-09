@@ -52,11 +52,11 @@ public class LocationDetailActivity extends AppCompatActivity {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //Create an arraylist of locations
+                //Create an array-list of locations
 
                 Log.d("Firebase","EnteredCallback:success");
 
-                //get All datasnapshotobjects from the "locations" document(aka table)
+                //get All data snapshot objects from the "locations" document(aka table)
                 for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
                     Location boi = postSnapshot.getValue(Location.class);
                     locationsArrayList.add(boi);
