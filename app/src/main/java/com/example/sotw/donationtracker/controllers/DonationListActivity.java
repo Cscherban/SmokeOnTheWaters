@@ -44,15 +44,32 @@ public class DonationListActivity extends AppCompatActivity {
         OurModel model = OurModel.getInstance();
         List<DonationDropOff> donations = model.getDonations();
         String locationName = getIntent().getStringExtra("locale");
+        String newLocationName = getIntent().getStringExtra("location");
+        String typeOfSearch = getIntent().getStringExtra("type");
+        String searchName = getIntent().getStringExtra("searchName");
+        filteredDonations = filterer(locationName, newLocationName, typeOfSearch, searchName);
+
+        listAdapter = new MyAdapter(filteredDonations);
+        donationList.setAdapter(listAdapter);
+
+    }
+
+    /**
+     * Filterer for displaying  a list of donations
+     * @param locationName the check to make sure searching is wanted
+     * @param newLocationName the name of the location, or all
+     * @param typeOfSearch the type of search, category or name
+     * @param searchName the category to search for, or the name to search for
+     * @return an arraylist of the filtered items
+     */
+    private ArrayList<DonationDropOff> filterer(String locationName, String newLocationName, String typeOfSearch, String searchName) {
         filteredDonations = new ArrayList<>();
         if ("searchForDonation".equals(locationName)) {
-            String newLocationName = getIntent().getStringExtra("location");
-            String typeOfSearch = getIntent().getStringExtra("type");
+
             if ("All".equals(newLocationName)) {
                 if ("category".equals(typeOfSearch)) {
-                    String categoryName = getIntent().getStringExtra("categoryName");
                     for (int i = 0; i < donations.size(); i++) {
-                        if (donations.get(i).getCategory().getItem().equals(categoryName)) {
+                        if (donations.get(i).getCategory().getItem().equals(searchName)) {
                             filteredDonations.add(donations.get(i));
                         }
                     }
@@ -62,23 +79,21 @@ public class DonationListActivity extends AppCompatActivity {
                                 null, 0, null));
                     }
                 } else if ("name".equals(typeOfSearch)) {
-                    String nameSearch = getIntent().getStringExtra("nameSearch");
                     for (int i = 0; i < donations.size(); i++) {
-                        if (donations.get(i).getShortDescription().equals(nameSearch)) {
+                        if (donations.get(i).getShortDescription().equals(searchName)) {
                             filteredDonations.add(donations.get(i));
                         }
                     }
                     if (filteredDonations.isEmpty()) {
                         filteredDonations.add(new DonationDropOff(null,
-                                                                null, "Nothing Found",
-                                                                null, 0, null));
+                                null, "Nothing Found",
+                                null, 0, null));
                     }
                 }
             } else {
                 if ("category".equals(typeOfSearch)) {
-                    String categoryName = getIntent().getStringExtra("categoryName");
                     for (int i = 0; i < donations.size(); i++) {
-                        if (donations.get(i).getCategory().getItem().equals(categoryName)
+                        if (donations.get(i).getCategory().getItem().equals(searchName)
                                 && donations.get(i).getLocation().getName().equals(newLocationName))
                         {
                             filteredDonations.add(donations.get(i));
@@ -86,13 +101,12 @@ public class DonationListActivity extends AppCompatActivity {
                     }
                     if (filteredDonations.isEmpty()) {
                         filteredDonations.add(new DonationDropOff("",
-                                                new Location(""), "Nothing Found",
-                                                "", 0, Category.Other));
+                                new Location(""), "Nothing Found",
+                                "", 0, Category.Other));
                     }
                 } else {
-                    String nameSearch = getIntent().getStringExtra("nameSearch");
                     for (int i = 0; i < donations.size(); i++) {
-                        if (donations.get(i).getShortDescription().equals(nameSearch)
+                        if (donations.get(i).getShortDescription().equals(searchName)
                                 && donations.get(i).getLocation().getName().equals(newLocationName))
                         {
                             filteredDonations.add(donations.get(i));
@@ -100,8 +114,8 @@ public class DonationListActivity extends AppCompatActivity {
                     }
                     if (filteredDonations.isEmpty()) {
                         filteredDonations.add(new DonationDropOff("", new Location(""),
-                                            "Nothing Found", "",
-                                            0, Category.Other));
+                                "Nothing Found", "",
+                                0, Category.Other));
                     }
                 }
             }
@@ -112,9 +126,7 @@ public class DonationListActivity extends AppCompatActivity {
                 }
             }
         }
-        listAdapter = new MyAdapter(filteredDonations);
-        donationList.setAdapter(listAdapter);
-
+        return filteredDonations;
     }
 
     /**

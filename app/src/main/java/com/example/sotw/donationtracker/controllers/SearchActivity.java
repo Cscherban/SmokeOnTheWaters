@@ -72,7 +72,7 @@ public class SearchActivity extends AppCompatActivity {
                     categorySearch.putExtra("locale", "searchForDonation");
                     categorySearch.putExtra("location", location.getName());
                     categorySearch.putExtra("type", "category");
-                    categorySearch.putExtra("categoryName", cat);
+                    categorySearch.putExtra("searchName", cat);
                     startActivity(categorySearch);
                 } else if ("Item Name".equals(searchType.getSelectedItem())) {
                     String item = itemName.getText().toString();
@@ -83,7 +83,7 @@ public class SearchActivity extends AppCompatActivity {
                     nameSearch.putExtra("locale", "searchForDonation");
                     nameSearch.putExtra("location", location.getName());
                     nameSearch.putExtra("type", "name");
-                    nameSearch.putExtra("nameSearch", item);
+                    nameSearch.putExtra("searchName", item);
                     startActivity(nameSearch);
                 }
             }
