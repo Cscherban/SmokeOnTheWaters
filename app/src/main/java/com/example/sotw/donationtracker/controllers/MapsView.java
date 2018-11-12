@@ -38,6 +38,7 @@ import java.util.List;
 public class MapsView extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    public static GoogleMap otherMap;
     private FirebaseDatabase database;
     private DatabaseReference reference;
     private List<com.example.sotw.donationtracker.model.Location> locationList;
@@ -72,6 +73,7 @@ public class MapsView extends FragmentActivity implements OnMapReadyCallback {
 
 
         mMap = googleMap;
+        otherMap = mMap;
 
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -173,7 +175,8 @@ public class MapsView extends FragmentActivity implements OnMapReadyCallback {
                     mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                         @Override
                         public boolean onMarkerClick(Marker marker) {
-                            String name = "";
+                            com.example.sotw.donationtracker.model.Location correctLocation = findCorrectLocation(marker.getTag().toString(), locationList);
+                            /*String name = "";
 
                             if(marker.getTag() != null){
                                 name = marker.getTag().toString();
@@ -190,6 +193,20 @@ public class MapsView extends FragmentActivity implements OnMapReadyCallback {
                                     locationObject.putExtra("website", location.getWebsite());
                                     startActivity(locationObject);
                                 }
+                            }*/
+
+                            if (correctLocation != null) {
+
+                                Intent locationObject = new Intent(getApplicationContext(),
+                                        LocationView.class);
+                                locationObject.putExtra("address", correctLocation.getAddress());
+                                locationObject.putExtra("name", correctLocation.getName());
+                                locationObject.putExtra("phone", correctLocation.getPhone());
+                                locationObject.putExtra("type", correctLocation.getType());
+                                locationObject.putExtra("website", correctLocation.getWebsite());
+                                startActivity(locationObject);
+                            } else {
+                                Log.d("MAPACTIVITY", "SOMETHING WENT WRONG");
                             }
 
 
@@ -201,5 +218,26 @@ public class MapsView extends FragmentActivity implements OnMapReadyCallback {
                 }
             }
         }
+    }
+
+    public static com.example.sotw.donationtracker.model.Location findCorrectLocation(String markerTag, List<com.example.sotw.donationtracker.model.Location> locList) {
+        String name;
+        if(markerTag != null){
+            name = markerTag;
+        } else {
+            return null;
+        }
+        if (locList == null) {
+            return null;
+        }
+        for (com.example.sotw.donationtracker.model.Location location
+                : locList) {
+            if (location.getKey() != null) {
+                if (location.getKey().equals(name)) {
+                    return location;
+                }
+            }
+            }
+            return null;
     }
 }
