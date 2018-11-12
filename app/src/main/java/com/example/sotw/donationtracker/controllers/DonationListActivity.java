@@ -47,7 +47,7 @@ public class DonationListActivity extends AppCompatActivity {
         String newLocationName = getIntent().getStringExtra("location");
         String typeOfSearch = getIntent().getStringExtra("type");
         String searchName = getIntent().getStringExtra("searchName");
-        filteredDonations = filterer(locationName, newLocationName, typeOfSearch, searchName);
+        filteredDonations = filterer(donations, locationName, newLocationName, typeOfSearch, searchName);
 
         listAdapter = new MyAdapter(filteredDonations);
         donationList.setAdapter(listAdapter);
@@ -62,8 +62,8 @@ public class DonationListActivity extends AppCompatActivity {
      * @param searchName the category to search for, or the name to search for
      * @return an arraylist of the filtered items
      */
-    private ArrayList<DonationDropOff> filterer(String locationName, String newLocationName, String typeOfSearch, String searchName) {
-        filteredDonations = new ArrayList<>();
+    public static ArrayList<DonationDropOff> filterer(List<DonationDropOff> donations, String locationName, String newLocationName, String typeOfSearch, String searchName) {
+        ArrayList<DonationDropOff> filteredDonations = new ArrayList<>();
         if ("searchForDonation".equals(locationName)) {
 
             if ("All".equals(newLocationName)) {
