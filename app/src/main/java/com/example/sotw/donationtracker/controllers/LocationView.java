@@ -6,6 +6,9 @@ import android.widget.TextView;
 
 import com.example.sotw.donationtracker.R;
 
+/**
+ * View for location
+ */
 public class LocationView extends AppCompatActivity {
     private TextView textView;
 
@@ -22,7 +25,9 @@ public class LocationView extends AppCompatActivity {
         String type = getIntent().getStringExtra("type");
         String website = getIntent().getStringExtra("website");
 
-        String everything = address + "\n\n\n" + name + "\n\n\n" + "Phone: " + phone + "\n\n\n" + "Type: " + type + "\n\n\n" + "Website: " + website;
+        String everything = address + "\n\n\n" + name + "\n\n\n"
+                            + "Phone: " + phone + "\n\n\n" + "Type: " + type
+                            + "\n\n\n" + "Website: " + website;
         textView.setText(everything);
 
     }

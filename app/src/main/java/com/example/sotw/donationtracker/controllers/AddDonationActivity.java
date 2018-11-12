@@ -21,22 +21,25 @@ import com.example.sotw.donationtracker.model.DonationDropOff;
 import com.example.sotw.donationtracker.model.Location;
 import com.example.sotw.donationtracker.model.OurModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Activity to Add Donation
+ */
 public class AddDonationActivity extends AppCompatActivity {
-    private  static FirebaseAuth mAuth;     //Firebase Autherization object
-    private  static DatabaseReference ref =  FirebaseDatabase.getInstance().getReference();
+    private  static FirebaseAuth mAuth;     //Firebase Authorization object
+    private  static final DatabaseReference ref =  FirebaseDatabase.getInstance().getReference();
 
     private Spinner categories;
 
     private void addDonationToDB(DonationDropOff donation){
 
 
-        //get the key for locaiton in the db
+        //get the key for location in the db
         String donationTimestamp = donation.getTimestamp();
 
-        //get a reference to where we want to write( which is making the donation a child of each location
+        //get a reference to where we want to write
+        // ( which is making the donation a child of each location)
         DatabaseReference donationsRef = ref.child("donations");
         donationsRef.child(donationTimestamp).setValue(donation);
     }
@@ -46,10 +49,10 @@ public class AddDonationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_donation);
 
-        Button addDonation = (Button) findViewById(R.id.add);
+        Button addDonation = findViewById(R.id.add);
         final String locationName = getIntent().getStringExtra("locale");
 
-        categories = (Spinner) findViewById(R.id.categories);
+        categories = findViewById(R.id.categories);
 
         String[] categs = new String[]{Category.Clothing.getItem(), Category.Electronics.getItem()
         , Category.Hat.getItem(), Category.Household.getItem(), Category.Kitchen.getItem(),
@@ -62,12 +65,12 @@ public class AddDonationActivity extends AppCompatActivity {
         addDonation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText shortDesc = (EditText) findViewById(R.id.editShort);
-                EditText longDesc = (EditText) findViewById(R.id.editLong);
-                EditText comments = (EditText) findViewById(R.id.editComments);
-                EditText date = (EditText) findViewById(R.id.editDate);
-                EditText time = (EditText) findViewById(R.id.editTime);
-                EditText value = (EditText) findViewById(R.id.editValue);
+                EditText shortDesc = findViewById(R.id.editShort);
+                EditText longDesc = findViewById(R.id.editLong);
+                EditText comments = findViewById(R.id.editComments);
+                EditText date = findViewById(R.id.editDate);
+                EditText time = findViewById(R.id.editTime);
+                EditText value = findViewById(R.id.editValue);
 
                 Location location = new Location(locationName);
                 String dateString = date.getText().toString();
@@ -79,9 +82,9 @@ public class AddDonationActivity extends AppCompatActivity {
                 String categName = categories.getSelectedItem().toString();
                 Category[] categoryTypes = Category.values();
                 Category donationCategory = null;
-                for (int i = 0; i < categoryTypes.length; i++) {
-                    if (categName.equals(categoryTypes[i].getItem())) {
-                        donationCategory = categoryTypes[i];
+                for (Category cat : categoryTypes) {
+                    if (categName.equals(cat.getItem())) {
+                        donationCategory = cat;
                     }
                 }
 
@@ -89,13 +92,15 @@ public class AddDonationActivity extends AppCompatActivity {
                 double val = Double.parseDouble(valueString);
 
 
-                DonationDropOff donation = new DonationDropOff(dateTime, location, shortDescription, longDescription, val, donationCategory);
+                DonationDropOff donation =
+                        new DonationDropOff(dateTime, location, shortDescription,
+                                            longDescription, val, donationCategory);
                 addDonationToDB(donation);
 
                 OurModel model = OurModel.getInstance();
                 List<DonationDropOff> donationList = model.getDonations();
                 donationList.add(donation);
-                Log.d("Addingstuff", donationList.get(0).getLocation().getName());
+                Log.d("Adding Stuff", donationList.get(0).getLocation().getName());
                 model.setDonations(donationList);
 
                 Intent goBack = new Intent(getApplicationContext(), LocationEmployeeActivity.class);
