@@ -197,7 +197,54 @@ public class DonationDropOff {
      */
     @Override
     public String toString() {
-        return shortDescription + "found at " + location + "at " + timestamp + ".It is worth " +
-                value + " . It is a " + category;
+        String ret = "";
+
+        if(shortDescription == null && longDescription != null && longDescription.length() != 0){
+            ret += longDescription;
+        }else if (shortDescription == null || shortDescription.length() == 0){
+            ret += "Unknown item";
+        }else{
+            ret += shortDescription;
+        }
+        ret += " found at ";
+
+        if(location != null) {
+            ret += location;
+        }else{
+            ret += "unspecified location";
+        }
+        ret += " at ";
+
+        if (timestamp !=  null){
+            ret += timestamp;
+        }else{
+            ret +="00:00:00 UTC";
+        }
+
+        ret += ". It is worth ";
+
+        if (value >= 0){
+            ret += "$" + value + " Dollars";
+        }else{
+            ret +="$0 Dollars";
+        }
+        ret += ". It is a";
+
+
+        if (category == null){
+            ret += " non-category";
+        }else{
+           char first_letter = category.toString().toLowerCase().charAt(0);
+
+           if(first_letter == 'a' || first_letter == 'e'
+                   ||first_letter == 'i' || first_letter == 'o'){
+               ret += "n";
+           }
+
+           ret += " " + category;
+        }
+
+
+        return ret + ".";
     }
 }
