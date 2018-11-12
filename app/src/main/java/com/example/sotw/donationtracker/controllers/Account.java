@@ -9,6 +9,9 @@ import android.widget.Button;
 import com.example.sotw.donationtracker.R;
 import com.google.firebase.auth.FirebaseAuth;
 
+/**
+ * Class that lets you view Account
+ */
 public class Account extends AppCompatActivity {
 
 
@@ -17,7 +20,7 @@ public class Account extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
-        Button logout = (Button) findViewById(R.id.logout);
+        Button logout = findViewById(R.id.logout);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override

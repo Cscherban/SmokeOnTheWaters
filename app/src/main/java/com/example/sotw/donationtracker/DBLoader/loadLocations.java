@@ -2,6 +2,7 @@ package com.example.sotw.donationtracker.DBLoader;
 
 import android.content.Context;
 import android.os.Environment;
+import android.util.Log;
 
 import com.example.sotw.donationtracker.R;
 import com.example.sotw.donationtracker.model.Location;
@@ -18,23 +19,23 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class loadLocations {
-    private  static FirebaseAuth mAuth;     //Firebase Autherization object
+class loadLocations {
+    private  static FirebaseAuth mAuth;     //Firebase Authorization object
     private  static DatabaseReference ref;
 
     private  static List<Location> parseCSV(Context context, String filename){
         List<Location> locations = new ArrayList<>();
         BufferedReader br = null;
-        String line = "";
+        String line;
         String cvsSplitBy = ",";
 
         try {
             InputStream is = context.getResources().openRawResource(R.raw.locationdata);
 
             br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+            br.readLine();
             line = br.readLine(); //read/ignore first line
-            while ((line = br.readLine()) != null) {
-
+            while (line != null) {
                 // use comma as separator
                 String[] data = line.split(cvsSplitBy);
                 String key = data[0];
@@ -49,12 +50,13 @@ public class loadLocations {
 
                 locations.add(new Location(key,name,address,latitude,longitude,type,phone,website));
 
-
+                line = br.readLine();
             }
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }  catch(IOException e) {
+            Log.d("asdf","io excpetion");
             e.printStackTrace();
         }
         finally {
@@ -88,7 +90,8 @@ public class loadLocations {
 
 
         //Absolute path, ugly yes. but idk any other way for now
-        String location = Environment.getExternalStorageDirectory().getPath() + "/Download/locationdata.csv";
+        String location = Environment.getExternalStorageDirectory().getPath()
+                                                + "/Download/locationdata.csv";
         List<Location> locations = parseCSV(context, location);
         putIntoFirebase(locations);
 

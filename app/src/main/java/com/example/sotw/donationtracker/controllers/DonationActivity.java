@@ -7,8 +7,9 @@ import android.widget.TextView;
 import com.example.sotw.donationtracker.R;
 import com.example.sotw.donationtracker.model.DonationDropOff;
 
-import org.w3c.dom.Text;
-
+/**
+ * Activity for donations
+ */
 public class DonationActivity extends AppCompatActivity {
 
     private DonationDropOff donation;
@@ -18,12 +19,12 @@ public class DonationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_donation);
         donation = DonationListActivity.getPublicDonation();
 
-        TextView dateTime = (TextView) findViewById(R.id.datetime);
-        TextView locationName = (TextView) findViewById(R.id.locationName);
-        TextView shortDesc = (TextView) findViewById(R.id.shortDesc);
-        TextView longDesc = (TextView) findViewById(R.id.longDesc);
-        TextView value = (TextView) findViewById(R.id.value);
-        TextView category = (TextView) findViewById(R.id.category);
+        TextView dateTime = findViewById(R.id.datetime);
+        TextView locationName = findViewById(R.id.locationName);
+        TextView shortDesc = findViewById(R.id.shortDesc);
+        TextView longDesc = findViewById(R.id.longDesc);
+        TextView value = findViewById(R.id.value);
+        TextView category = findViewById(R.id.category);
 
         dateTime.setText(donation.getTimestamp());
         locationName.setText(donation.getLocation().getName());

@@ -26,13 +26,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
-
+/**
+ * class to control user registration
+ */
 public class registration extends AppCompatActivity {
     /**
      * UI elements
@@ -46,8 +47,8 @@ public class registration extends AppCompatActivity {
     /**
      * Useful objects
      */
-    public Actor user;              //User Object
-    private FirebaseAuth mAuth;     //Firebase Autherization object
+    private Actor user;              //User Object
+    private FirebaseAuth mAuth;     //Firebase Authorization object
     private DatabaseReference ref; //Reference to the DB..to let us modify it
     private OurModel ourModel;
 
@@ -76,7 +77,10 @@ public class registration extends AppCompatActivity {
         locationEmp.setVisibility(View.GONE);
 
 
-        String[] spinnerValues = new String[]{"Pick a type of user", "User", "Location Employee", "Branch Manager", "Admin"};
+        String[] spinnerValues = new String[]{"Pick a type of user", "User",
+                                                "Location Employee", "Branch Manager",
+                                                "Admin"};
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, spinnerValues);
         spinner.setAdapter(adapter);
@@ -89,8 +93,9 @@ public class registration extends AppCompatActivity {
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                if (spinner.getSelectedItem().toString().equals("Location Employee")) {
+            public void onItemSelected(AdapterView<?> parentView,
+                                        View selectedItemView, int position, long id) {
+                if ("Location Employee".equals(spinner.getSelectedItem().toString())) {
                     locationEmp.setVisibility(View.VISIBLE);
                 } else {
                     locationEmp.setVisibility(View.GONE);
@@ -134,35 +139,41 @@ public class registration extends AppCompatActivity {
                 }else if(invalidPassword(password.getText().toString())) {
                     failed.setText("Please Enter a valid password");
 
-                }else if(spinner.getSelectedItem().toString().equals("Pick a type of user")){
+                }else if("Pick a type of user".equals(spinner.getSelectedItem())){
                     failed.setText("Please Enter a value into the Spinner");
-                } else if (spinner.getSelectedItem().toString().equals("Location Employee")
-                        && locationEmp.getSelectedItem().toString().equals("Pick a Location")) {
+                } else if ("Location Employee".equals(spinner.getSelectedItem())
+                        && "Pick a Location".equals(locationEmp.getSelectedItem())) {
                     failed.setText("Location Employees must have a valid location");
                 } else{
 
-                    if (spinner.getSelectedItem().equals("User")) {
+                    if ("User".equals(spinner.getSelectedItem())) {
                         user = new User(name.getText().toString(), email.getText().toString(),
-                                password.getText().toString(), spinner.getSelectedItem().toString());
+                                password.getText().toString(),
+                                                        spinner.getSelectedItem().toString());
 
                         Log.d("Success", "CreatedUser:success");
 
-                    } else if (spinner.getSelectedItem().equals("Location Employee")) {
+                    } else if ("Location Employee".equals(spinner.getSelectedItem())) {
 
-                            user = new LocationEmployee(name.getText().toString(), email.getText().toString(),
-                                    password.getText().toString(), spinner.getSelectedItem().toString(),
+                            user = new LocationEmployee(name.getText().toString(),
+                                    email.getText().toString(), password.getText().toString(),
+                                    spinner.getSelectedItem().toString(),
                                     (Location) locationEmp.getSelectedItem());
+
                             Log.d("Success", "CreatedLocationEmployee:success");
 
-                    } else if (spinner.getSelectedItem().equals("Branch Manager")) {
-                        user = new BranchManager(name.getText().toString(), email.getText().toString(),
-                                password.getText().toString(), spinner.getSelectedItem().toString());
+                    } else if ("Branch Manager".equals(spinner.getSelectedItem())) {
+                        user = new BranchManager(name.getText().toString(),
+                                                email.getText().toString(),
+                                                password.getText().toString(),
+                                                spinner.getSelectedItem().toString());
 
                         Log.d("Success", "CreatedBranchManager:success");
 
                     } else {
                         user = new Admin(name.getText().toString(), email.getText().toString(),
-                                password.getText().toString(), spinner.getSelectedItem().toString());
+                                password.getText().toString(),
+                                spinner.getSelectedItem().toString());
 
                         Log.d("Success", "CreatedAdmin:success");
 
@@ -185,21 +196,21 @@ public class registration extends AppCompatActivity {
     private boolean invalidPassword(String password){
         //Validation logic from some framework
         //for now
-        return password.equals("");
+        return "".equals(password);
     }
 
     private boolean invalidEmail(String email){
         //Validation logic from some framework
         //for now
-        return email.equals("");
+        return "".equals(email);
     }
     private boolean invalidName(String name){
-        return name.equals("") || name.length() <=2;
+        return ("".equals(name)) || (name.length() <=2);
     }
 
 
 
-    private boolean createUserInDB(Actor user,FirebaseUser firebaseUser){
+    private void createUserInDB(Actor user,FirebaseUser firebaseUser){
         DatabaseReference usersRef = ref.child("users");
         Log.d("DB", "DBInteraction:started");
 
@@ -216,7 +227,6 @@ public class registration extends AppCompatActivity {
         //Since I only care about putting a single user in the DB
         usersRef.child(firebaseUser.getUid()).setValue(user);
 
-        return true;
     }
 
     private void firstAuthentication(final Actor user){
@@ -233,9 +243,13 @@ public class registration extends AppCompatActivity {
                             FirebaseUser fireBaseUser = mAuth.getCurrentUser();
 
                             //Create the User in the DB
-                            if(createUserInDB(user,fireBaseUser)){
+                            if(fireBaseUser != null){
+                                createUserInDB(user,fireBaseUser);
 
-                                Intent registeredIntent = new Intent(getApplicationContext(), RegisteredActivity.class);
+                                Intent registeredIntent
+                                        = new Intent(getApplicationContext(),
+                                        RegisteredActivity.class);
+
                                 registeredIntent.putExtra("userType", user.getUserType());
                                 registeredIntent.putExtra("name", user.getName());
                                 registeredIntent.putExtra("e-mail", user.getEmail());
@@ -252,7 +266,10 @@ public class registration extends AppCompatActivity {
                             // If sign in fails, display a message to the user.
                             Log.w("Failure", "createUserWithEmail:failure", task.getException());
                             TextView failed = findViewById(R.id.failed);
-                            failed.setText(task.getException().toString());
+                            Exception e =task.getException();
+                            if(e != null){
+                                failed.setText(e.toString());
+                            }
                         }
 
                     }
@@ -271,7 +288,6 @@ public class registration extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        //TODO do something
     }
 }
 

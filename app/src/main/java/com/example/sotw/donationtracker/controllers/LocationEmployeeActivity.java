@@ -13,6 +13,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
+/**
+ * Activity for location employee home
+ */
 public class LocationEmployeeActivity extends AppCompatActivity {
 
     @Override
@@ -21,9 +24,9 @@ public class LocationEmployeeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_location_employee);
         final String locationName = getIntent().getStringExtra("locale");
 
-        Button logout = (Button) findViewById(R.id.logoutLocation);
-        Button showDon = (Button) findViewById(R.id.seeDonations);
-        Button addDon = (Button) findViewById(R.id.addDonation);
+        Button logout = findViewById(R.id.logoutLocation);
+        Button showDon = findViewById(R.id.seeDonations);
+        Button addDon = findViewById(R.id.addDonation);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,11 +43,13 @@ public class LocationEmployeeActivity extends AppCompatActivity {
         showDon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent seeDonations = new Intent(getApplicationContext(), DonationListActivity.class);
+                Intent seeDonations =
+                        new Intent(getApplicationContext(), DonationListActivity.class);
+
                 seeDonations.putExtra("locale", locationName);
                 OurModel model = OurModel.getInstance();
                 List<DonationDropOff> donations = model.getDonations();
-                if (donations.size() != 0) {
+                if (!donations.isEmpty()) {
                     startActivity(seeDonations);
                 }
             }

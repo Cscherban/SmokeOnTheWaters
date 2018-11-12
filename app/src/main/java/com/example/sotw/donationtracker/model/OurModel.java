@@ -3,7 +3,6 @@ package com.example.sotw.donationtracker.model;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.example.sotw.donationtracker.controllers.LocationDetailActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -13,16 +12,27 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class that holds locations for us in a list and donations
+ */
 public class OurModel {
     //holds some static objects for us
     private static final OurModel instance = new OurModel();
-    private DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+    private final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+
+    /**
+     * A singleton
+     * @return an instance of the outmodel
+     */
     public static OurModel getInstance() { return instance; }
     private boolean firstLoadDonations;
 
     private List<Location> locations;
     private List<DonationDropOff> donations;
 
+    /**
+     * Grabs all the locations from DB and puts them into list
+     */
     private void setLocationsFromDB(){
 
         DatabaseReference ref = reference.child("locations");
@@ -34,7 +44,7 @@ public class OurModel {
 
                 Log.d("Firebase","EnteredCallback:success");
 
-                //get All datasnapshotobjects from the "locations" document(aka table)
+                //get All data snapshot objects from the "locations" document(aka table)
                 for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
                     Location boi = postSnapshot.getValue(Location.class);
                     locations.add(boi);
@@ -53,6 +63,9 @@ public class OurModel {
 
     }
 
+    /**
+     * Grabs all the donations from DB and puts them into list
+     */
     private void setDonationsFromDB(){
 
         DatabaseReference ref = reference.child("donations");
@@ -67,7 +80,7 @@ public class OurModel {
 
                 Log.d("Firebase","EnteredCallback:success");
 
-                //get All datasnapshotobjects from the "locations" document(aka table)
+                //get All data snapshot objects from the "locations" document(aka table)
                 for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
                     DonationDropOff boi = postSnapshot.getValue(DonationDropOff.class);
                     donations.add(boi);
@@ -88,26 +101,45 @@ public class OurModel {
     }
 
 
+    /**
+     * Constructor for our model, initializes the lists
+     */
     public OurModel() {
-        this.locations = new ArrayList<Location>();
-        this.donations = new ArrayList<DonationDropOff>();
+        this.locations = new ArrayList<>();
+        this.donations = new ArrayList<>();
         firstLoadDonations = true;
         setDonationsFromDB();
         setLocationsFromDB();
     }
 
+    /**
+     *
+     * @return the locations list
+     */
     public List<Location> getLocations() {
         return locations;
     }
 
+    /**
+     *
+     * @param locations set the locations list
+     */
     public void setLocations(List<Location> locations) {
         this.locations = locations;
     }
 
+    /**
+     *
+     * @return get the donations as list
+     */
     public List<DonationDropOff> getDonations() {
         return donations;
     }
 
+    /**
+     *
+     * @param donations set the donations list
+     */
     public void setDonations(List<DonationDropOff> donations) {
         this.donations = donations;
     }
