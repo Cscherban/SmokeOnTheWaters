@@ -42,12 +42,13 @@ public class DonationListActivity extends AppCompatActivity {
         donationList.setLayoutManager(listLayout);
 
         OurModel model = OurModel.getInstance();
-        List<DonationDropOff> donations = model.getDonations();
+        donations = model.getDonations();
         String locationName = getIntent().getStringExtra("locale");
         String newLocationName = getIntent().getStringExtra("location");
         String typeOfSearch = getIntent().getStringExtra("type");
         String searchName = getIntent().getStringExtra("searchName");
-        filteredDonations = filterer(donations, locationName, newLocationName, typeOfSearch, searchName);
+        filteredDonations = filterer(
+                donations, locationName, newLocationName, typeOfSearch, searchName);
 
         listAdapter = new MyAdapter(filteredDonations);
         donationList.setAdapter(listAdapter);
@@ -63,7 +64,9 @@ public class DonationListActivity extends AppCompatActivity {
      * @param searchName the category to search for, or the name to search for
      * @return an arraylist of the filtered items
      */
-    public static ArrayList<DonationDropOff> filterer(List<DonationDropOff> donations, String locationName, String newLocationName, String typeOfSearch, String searchName) {
+    public static ArrayList<DonationDropOff> filterer(List<DonationDropOff> donations,
+                                                      String locationName, String newLocationName,
+                                                      String typeOfSearch, String searchName) {
         ArrayList<DonationDropOff> filteredDonations = new ArrayList<>();
         if ("searchForDonation".equals(locationName)) {
 

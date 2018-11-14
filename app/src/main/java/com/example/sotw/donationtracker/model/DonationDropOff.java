@@ -199,9 +199,9 @@ public class DonationDropOff {
     public String toString() {
         String ret = "";
 
-        if(shortDescription == null && longDescription != null && !longDescription.isEmpty()){
+        if((shortDescription == null) && (longDescription != null) && (!longDescription.isEmpty())){
             ret += longDescription;
-        }else if (shortDescription == null || shortDescription.isEmpty()){
+        }else if ((shortDescription == null) || (shortDescription.isEmpty())){
             ret += "Unknown item";
         }else{
             ret += shortDescription;
