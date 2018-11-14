@@ -56,6 +56,7 @@ public class DonationListActivity extends AppCompatActivity {
 
     /**
      * Filterer for displaying  a list of donations
+     * @param donations the list of donations
      * @param locationName the check to make sure searching is wanted
      * @param newLocationName the name of the location, or all
      * @param typeOfSearch the type of search, category or name
@@ -120,11 +121,9 @@ public class DonationListActivity extends AppCompatActivity {
                 }
             }
         } else {
-            for (int i = 0; i < donations.size(); i++) {
-                if (donations.get(i).getLocation().getName().equals(locationName)) {
-                    filteredDonations.add(donations.get(i));
-                }
-            }
+            filteredDonations.add(new DonationDropOff("", new Location(""),
+                    "Search Failure", "",
+                    0, Category.Other));
         }
         return filteredDonations;
     }

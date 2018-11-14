@@ -175,7 +175,8 @@ public class MapsView extends FragmentActivity implements OnMapReadyCallback {
                     mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                         @Override
                         public boolean onMarkerClick(Marker marker) {
-                            com.example.sotw.donationtracker.model.Location correctLocation = findCorrectLocation(marker.getTag().toString(), locationList);
+                            com.example.sotw.donationtracker.model.Location correctLocation =
+                                    findCorrectLocation(marker.getTag().toString(), locationList);
                             /*String name = "";
 
                             if(marker.getTag() != null){
@@ -220,7 +221,14 @@ public class MapsView extends FragmentActivity implements OnMapReadyCallback {
         }
     }
 
-    public static com.example.sotw.donationtracker.model.Location findCorrectLocation(String markerTag, List<com.example.sotw.donationtracker.model.Location> locList) {
+    /**
+     *
+     * @param markerTag marker for maps interface
+     * @param locList list of locations from our model
+     * @return the location from our model that matches the tag
+     */
+    public static com.example.sotw.donationtracker.model.Location findCorrectLocation(
+            String markerTag, List<com.example.sotw.donationtracker.model.Location> locList) {
         String name;
         if(markerTag != null){
             name = markerTag;
