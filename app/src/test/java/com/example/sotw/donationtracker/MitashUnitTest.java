@@ -33,7 +33,7 @@ public class MitashUnitTest {
 
      //   Log.d("TAG", marker1.getTag().toString());
 
-        assertEquals(true, MapsView.findCorrectLocation(tag, locationArrayList) instanceof com.example.sotw.donationtracker.model.Location);
+        //assertEquals(true, MapsView.findCorrectLocation(tag, locationArrayList) instanceof com.example.sotw.donationtracker.model.Location);
         assertEquals(tag, MapsView.findCorrectLocation(tag, locationArrayList).getKey());
 
 
@@ -105,7 +105,7 @@ public class MitashUnitTest {
     }
 
 
-    //one null key
+    //one null key in the list
     @Test
     public void nullKey() {
         String tag = "Yeet";
@@ -115,6 +115,7 @@ public class MitashUnitTest {
         locationArrayList.add(loc);
 
         com.example.sotw.donationtracker.model.Location loc1 = new com.example.sotw.donationtracker.model.Location("Generic Name1");
+        loc1.setKey(null);
         locationArrayList.add(loc1);
 
         com.example.sotw.donationtracker.model.Location loc2 = new com.example.sotw.donationtracker.model.Location("Generic Name1");

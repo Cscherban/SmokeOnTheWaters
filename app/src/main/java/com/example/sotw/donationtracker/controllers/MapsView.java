@@ -136,6 +136,7 @@ public class MapsView extends FragmentActivity implements OnMapReadyCallback {
                     LatLng sydney = new LatLng(latitude, longitude);
                     Marker main = mMap.addMarker(
                                     new MarkerOptions().position(sydney).title("You are here"));
+                    main.showInfoWindow();
 
                     main.setTag("mainMarker");
 
@@ -175,8 +176,7 @@ public class MapsView extends FragmentActivity implements OnMapReadyCallback {
                     mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                         @Override
                         public boolean onMarkerClick(Marker marker) {
-                            com.example.sotw.donationtracker.model.Location correctLocation = findCorrectLocation(marker.getTag().toString(), locationList);
-                            /*String name = "";
+                            String name = "";
 
                             if(marker.getTag() != null){
                                 name = marker.getTag().toString();
@@ -191,23 +191,13 @@ public class MapsView extends FragmentActivity implements OnMapReadyCallback {
                                     locationObject.putExtra("phone", location.getPhone());
                                     locationObject.putExtra("type", location.getType());
                                     locationObject.putExtra("website", location.getWebsite());
+                                    locationObject.putExtra("lattitude", location.getLatitude());
+                                    locationObject.putExtra("longitude", location.getLongitude());
                                     startActivity(locationObject);
                                 }
-                            }*/
-
-                            if (correctLocation != null) {
-
-                                Intent locationObject = new Intent(getApplicationContext(),
-                                        LocationView.class);
-                                locationObject.putExtra("address", correctLocation.getAddress());
-                                locationObject.putExtra("name", correctLocation.getName());
-                                locationObject.putExtra("phone", correctLocation.getPhone());
-                                locationObject.putExtra("type", correctLocation.getType());
-                                locationObject.putExtra("website", correctLocation.getWebsite());
-                                startActivity(locationObject);
-                            } else {
-                                Log.d("MAPACTIVITY", "SOMETHING WENT WRONG");
                             }
+
+
 
 
                             return false;
@@ -219,6 +209,12 @@ public class MapsView extends FragmentActivity implements OnMapReadyCallback {
             }
         }
     }
+
+    /**
+     * @param markerTag the tag of the marker
+     * @param locList a list of all the locations in the db
+     * @returns location for which the key matches the marker tag, null if there is no match within the list, and null if one or both arguments are null
+     */
 
     public static com.example.sotw.donationtracker.model.Location findCorrectLocation(String markerTag, List<com.example.sotw.donationtracker.model.Location> locList) {
         String name;
