@@ -199,9 +199,9 @@ public class DonationDropOff {
     public String toString() {
         String ret = "";
 
-        if(shortDescription == null && longDescription != null && longDescription.length() != 0){
+        if((shortDescription == null) && (longDescription != null) && (!longDescription.isEmpty())){
             ret += longDescription;
-        }else if (shortDescription == null || shortDescription.length() == 0){
+        }else if ((shortDescription == null) || (shortDescription.isEmpty())){
             ret += "Unknown item";
         }else{
             ret += shortDescription;
@@ -236,8 +236,8 @@ public class DonationDropOff {
         }else{
            char first_letter = category.toString().toLowerCase().charAt(0);
 
-           if(first_letter == 'a' || first_letter == 'e'
-                   ||first_letter == 'i' || first_letter == 'o'){
+           if((first_letter == 'a') || (first_letter == 'e')
+                   || (first_letter == 'i') || (first_letter == 'o')){
                ret += "n";
            }
 

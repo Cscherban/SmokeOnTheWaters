@@ -42,12 +42,13 @@ public class DonationListActivity extends AppCompatActivity {
         donationList.setLayoutManager(listLayout);
 
         OurModel model = OurModel.getInstance();
-        List<DonationDropOff> donations = model.getDonations();
+        donations = model.getDonations();
         String locationName = getIntent().getStringExtra("locale");
         String newLocationName = getIntent().getStringExtra("location");
         String typeOfSearch = getIntent().getStringExtra("type");
         String searchName = getIntent().getStringExtra("searchName");
-        filteredDonations = filterer(donations, locationName, newLocationName, typeOfSearch, searchName);
+        filteredDonations = filterer(
+                donations, locationName, newLocationName, typeOfSearch, searchName);
 
         listAdapter = new MyAdapter(filteredDonations);
         donationList.setAdapter(listAdapter);
@@ -56,13 +57,16 @@ public class DonationListActivity extends AppCompatActivity {
 
     /**
      * Filterer for displaying  a list of donations
+     * @param donations the list of donations
      * @param locationName the check to make sure searching is wanted
      * @param newLocationName the name of the location, or all
      * @param typeOfSearch the type of search, category or name
      * @param searchName the category to search for, or the name to search for
      * @return an arraylist of the filtered items
      */
-    public static ArrayList<DonationDropOff> filterer(List<DonationDropOff> donations, String locationName, String newLocationName, String typeOfSearch, String searchName) {
+    public static ArrayList<DonationDropOff> filterer(List<DonationDropOff> donations,
+                                                      String locationName, String newLocationName,
+                                                      String typeOfSearch, String searchName) {
         ArrayList<DonationDropOff> filteredDonations = new ArrayList<>();
         if ("searchForDonation".equals(locationName)) {
 
@@ -120,11 +124,9 @@ public class DonationListActivity extends AppCompatActivity {
                 }
             }
         } else {
-            for (int i = 0; i < donations.size(); i++) {
-                if (donations.get(i).getLocation().getName().equals(locationName)) {
-                    filteredDonations.add(donations.get(i));
-                }
-            }
+            filteredDonations.add(new DonationDropOff("", new Location(""),
+                    "Search Failure", "",
+                    0, Category.Other));
         }
         return filteredDonations;
     }
