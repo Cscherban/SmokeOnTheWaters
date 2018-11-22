@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import com.example.sotw.donationtracker.R;
 
+/**
+ * Main activity that is seen upon login
+ */
 public class MainActivity extends AppCompatActivity {
     private Button loginButton;
     private Button registerButton;
@@ -21,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        loginButton = (Button) findViewById(R.id.button);
-        registerButton = (Button) findViewById(R.id.button3);
-        locationButton = (Button) findViewById(R.id.LocationButton);
+        loginButton = findViewById(R.id.button);
+        registerButton = findViewById(R.id.button3);
+        locationButton = findViewById(R.id.LocationButton);
         maps = findViewById(R.id.MapView);
         forgot = findViewById(R.id.forgotPassword);
 
@@ -62,7 +65,9 @@ public class MainActivity extends AppCompatActivity {
         locationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent locationIntent = new Intent(getApplicationContext(), LocationDetailActivity.class);
+                Intent locationIntent =
+                        new Intent(getApplicationContext(),
+                                LocationDetailActivity.class);
 
                 startActivity(locationIntent);
             }

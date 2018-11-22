@@ -21,17 +21,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.DataSnapshot;
 
-import org.w3c.dom.Text;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Activity for viewing location details
+ */
 public class LocationDetailActivity extends AppCompatActivity {
 
-    private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference ref = database.getReference().child("locations");
-    private List<Location> locationsArrayList = new ArrayList<>();
+    private final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private final DatabaseReference ref = database.getReference().child("locations");
+    private final List<Location> locationsArrayList = new ArrayList<>();
     private RecyclerView locationList;
     private RecyclerView.Adapter listAdapter;
     private RecyclerView.LayoutManager listLayout;
@@ -41,7 +42,7 @@ public class LocationDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_detail);
-        locationList = (RecyclerView) findViewById(R.id.view);
+        locationList = findViewById(R.id.view);
         locationList.setHasFixedSize(true);
 
         listLayout = new LinearLayoutManager(this);
@@ -52,11 +53,11 @@ public class LocationDetailActivity extends AppCompatActivity {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //Create an arraylist of locations
+                //Create an array-list of locations
 
                 Log.d("Firebase","EnteredCallback:success");
 
-                //get All datasnapshotobjects from the "locations" document(aka table)
+                //get All data snapshot objects from the "locations" document(aka table)
                 for(DataSnapshot postSnapshot: dataSnapshot.getChildren()){
                     Location boi = postSnapshot.getValue(Location.class);
                     locationsArrayList.add(boi);
@@ -80,10 +81,17 @@ public class LocationDetailActivity extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     * @return the location for the detail
+     */
     public static Location getPublicLocation() {
         return publicLocation;
     }
 
+    /**
+     * Inner class to allow for use of RecyclerView
+     */
     public class MyAdapter
             extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
@@ -101,7 +109,7 @@ public class LocationDetailActivity extends AppCompatActivity {
         }
 
         @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             /*
 
               This sets up the view for each individual item in the recycler display
@@ -114,11 +122,12 @@ public class LocationDetailActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(final ViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
             //final Model model = Model.getInstance();
             /*
-            This is where we have to bind each data element in the list (given by position parameter)
+            This is where we have to bind each data element in
+             the list (given by position parameter)
             to an element in the view (which is one of our two TextView widgets
              */
             //start by getting the element at the correct position
@@ -144,7 +153,8 @@ public class LocationDetailActivity extends AppCompatActivity {
                             pass along the id of the course so we can retrieve the correct data in
                             the next window
                          */
-                        //intent.putExtra(CourseDetailFragment.ARG_COURSE_ID, holder.mLocation.getKey());
+                        //intent.putExtra(CourseDetailFragment.ARG_COURSE_ID,
+                        //  holder.mLocation.getKey());
                         //intent.putExtra("key",holder.mLocation.getKey());
                         publicLocation = holder.mLocation;
                         //now just display the new window
@@ -170,10 +180,15 @@ public class LocationDetailActivity extends AppCompatActivity {
             public final TextView mContentView;
             public Location mLocation;
 
+            /**
+             * constructor for ViewHolder
+             * @param view - view that will be used by recycler view
+             */
+
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
-                mContentView = (TextView) view.findViewById(R.id.locationName);
+                mContentView = view.findViewById(R.id.locationName);
             }
 
             @Override
