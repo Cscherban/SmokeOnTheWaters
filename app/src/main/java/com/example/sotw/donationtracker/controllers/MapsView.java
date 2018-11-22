@@ -122,7 +122,7 @@ public class MapsView extends FragmentActivity implements OnMapReadyCallback {
                     lattitude = location.getLatitude();
                     longitude = location.getLongitude();
 
-                    // Add a marker in Sydney and move the camera
+                    // Add a marker in your current location.
                     LatLng sydney = new LatLng(lattitude, longitude);
                     Marker main = mMap.addMarker(new MarkerOptions().position(sydney).title("You are here"));
                     main.setTag("mainMarker");

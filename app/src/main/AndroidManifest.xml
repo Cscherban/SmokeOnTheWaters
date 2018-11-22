@@ -60,7 +60,8 @@
         <activity
             android:name=".controllers.MapsView"
             android:label="@string/title_activity_maps_view" />
-        <activity android:name=".controllers.LocationView"></activity>
+        <activity android:name=".controllers.LocationView" />
+        <activity android:name=".controllers.PasswordReset"></activity>
     </application>
 
 </manifest>

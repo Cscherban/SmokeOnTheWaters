@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
-import com.example.sotw.donationtracker.DBLoader.loadLocations;
 import com.example.sotw.donationtracker.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private Button registerButton;
     private Button locationButton;
     private Button maps;
+    private TextView forgot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,14 @@ public class MainActivity extends AppCompatActivity {
         registerButton = (Button) findViewById(R.id.button3);
         locationButton = (Button) findViewById(R.id.LocationButton);
         maps = findViewById(R.id.MapView);
+        forgot = findViewById(R.id.forgotPassword);
+
+        forgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), PasswordReset.class));
+            }
+        });
 
         maps.setOnClickListener(new View.OnClickListener() {
             @Override
