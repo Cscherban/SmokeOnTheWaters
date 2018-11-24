@@ -14,12 +14,15 @@ import com.example.sotw.donationtracker.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class PasswordReset extends AppCompatActivity {
     private EditText email;
     private Button button;
     private FirebaseAuth mAuth;
     private ProgressDialog progressDialog;
+    private DatabaseReference ref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +37,7 @@ public class PasswordReset extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String emailAdd = email.getText().toString().trim();
+                final String emailAdd = email.getText().toString().trim();
 
                 if (emailAdd.equals("")) {
                     Toast.makeText(PasswordReset.this, "Enter a valid e-mail, ya goofball", Toast.LENGTH_LONG).show();
@@ -45,6 +48,9 @@ public class PasswordReset extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             progressDialog.dismiss();
                             if (task.isSuccessful()) {
+                                String newEmail = emailAdd.hashCode() + "";
+                                ref = FirebaseDatabase.getInstance().getReference();
+                                ref.child("LoginAttempts").child(newEmail).setValue(3);
                                 Toast.makeText(PasswordReset.this, "We sent you the e-mail, ya goofball", Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             } else {

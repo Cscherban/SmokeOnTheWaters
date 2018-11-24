@@ -31,6 +31,7 @@ import android.support.annotation.NonNull;
 public class login extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference ref; //Reference to the DB..to let us modify it
+    private boolean flag;
 
 
 
@@ -93,30 +94,100 @@ public class login extends AppCompatActivity {
      * Function to handle login failure
      */
     private void failure(){
-
-        TextView status = findViewById(R.id.status);
-        status.setText("Incorrect username or password");
+        EditText username = findViewById(R.id.username);
+        username.setText("Invalid E-mail or Password");
+      //  TextView status = findViewById(R.id.status);
+      //  status.setText("Incorrect username or password");
 
     }
 
-    private void attemptLogin(String email, String pass){
-        mAuth.signInWithEmailAndPassword(email, pass)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("Success Message", "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            if(user != null){
-                                success(user);
-                            }
-                        }else {
-                            failure();
-                        }
-
+    private void failureWithValidEmail() {
+        EditText username = findViewById(R.id.username);
+        final String email = username.getText().toString().trim();
+        final String NEWtempEmail = email.hashCode() + "";
+        ref.child("LoginAttempts").child(NEWtempEmail).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                TextView status = findViewById(R.id.status);
+                if (dataSnapshot.getValue() == null) {
+                    ref.child("LoginAttempts").child(NEWtempEmail).setValue(2);
+                    status.setText("Incorrect username or password." + "\n" + "Attempts Remaining: " + 2);
+                } else {
+                    ref.child("LoginAttempts").child(NEWtempEmail).setValue((long) (dataSnapshot.getValue()) - 1);
+                    long newAttempt = (long)(dataSnapshot.getValue()) - 1;
+                    status.setText("Incorrect username or password." + "\n" +"Attempts Remaining: " +
+                            newAttempt);
+                    if (newAttempt == 0) {
+                        status.setText("User locked out");
                     }
-                });
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void attemptLogin(final String email, final String pass){
+        flag = true;
+        int code = email.hashCode();
+        ref.child("LoginAttempts").child(code + "").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                TextView status = findViewById(R.id.status);
+                if (dataSnapshot.getValue() != null && ((long) dataSnapshot.getValue()) == 0) {
+                    status.setText("User locked out");
+                    flag = false;
+
+                } else {
+                    mAuth.signInWithEmailAndPassword(email, pass)
+                            .addOnCompleteListener(login.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Log.d("Success Message", "signInWithEmail:success");
+                                        FirebaseUser user = mAuth.getCurrentUser();
+                                        if (user != null) {
+                                            success(user);
+                                        }
+                                    } else {
+                                        failureWithValidEmail();
+                                    }
+
+                                }
+                            });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        if (false) {
+            mAuth.signInWithEmailAndPassword(email, pass)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d("Success Message", "signInWithEmail:success");
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                if (user != null) {
+                                    success(user);
+                                }
+                            } else {
+                                failureWithValidEmail();
+                            }
+
+                        }
+                    });
+        }
+
     }
 
     @Override
