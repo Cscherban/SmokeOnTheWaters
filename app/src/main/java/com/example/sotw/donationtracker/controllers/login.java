@@ -154,6 +154,8 @@ public class login extends AppCompatActivity {
                                         if (user != null) {
                                             success(user);
                                         }
+                                        ref.child("LoginAttempts").child(email.hashCode() + "").setValue(3);
+
                                     } else {
                                         failureWithValidEmail();
                                     }
@@ -168,25 +170,7 @@ public class login extends AppCompatActivity {
 
             }
         });
-        if (false) {
-            mAuth.signInWithEmailAndPassword(email, pass)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d("Success Message", "signInWithEmail:success");
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                if (user != null) {
-                                    success(user);
-                                }
-                            } else {
-                                failureWithValidEmail();
-                            }
 
-                        }
-                    });
-        }
 
     }
 
